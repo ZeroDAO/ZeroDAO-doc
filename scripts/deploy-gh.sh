@@ -6,7 +6,7 @@ set -e
 
 cd dist
 
-# echo 'docs.zerodao.net' > CNAME
+echo 'docs.zerodao.net' > CNAME
 
 git init
 
