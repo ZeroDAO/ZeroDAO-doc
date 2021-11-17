@@ -2,7 +2,7 @@ const { config } = require("vuepress-theme-hope");
 
 module.exports = config({
   title: "Docs",
-  description: "Atomicity Interoperability Token",
+  description: "User-friendly Web3",
 
   dest: "./dist",
 

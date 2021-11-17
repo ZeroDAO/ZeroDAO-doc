@@ -12,6 +12,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --no-cache",
-    "docs:eject-theme": "vuepress eject-hope docs"
+    "docs:eject-theme": "vuepress eject-hope docs",
+    "deploy": "yarn docs:build && bash scripts/deploy-gh.sh GH=1"
   }
 }
