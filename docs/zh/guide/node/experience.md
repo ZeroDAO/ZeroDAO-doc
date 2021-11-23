@@ -6,7 +6,7 @@ category: 体验
 
 ## 连接 Polkadot.js
 
-节点运行后，打开浏览器并输入链接：https://polkadot.js.org/apps/#/explorer ，点击“Development“，选择“Local Node” 。首次使用，你需要将 [types.json](https://github.com/ZeroDAO/ZeroDAO-node/types/types.json) 文件中的内容添加到 “设置” - “开发者” 中。
+节点运行后，打开浏览器并输入链接：https://polkadot.js.org/apps/#/explorer ，点击“Development“，选择“Local Node” 。首次使用，你需要将 [types.json](https://github.com/ZeroDAO/ZeroDAO-node/blob/main/types/types.json) 文件中的内容添加到 “设置” - “开发者” 中。
 
 ![](../../image/polkadotjs.png)
 
@@ -18,7 +18,7 @@ category: 体验
 
 ### 安装
 
-```b
+```base
 git clone https://github.com/ZeroDAO/experience-app
 cd experience-app
 yarn
@@ -26,7 +26,7 @@ yarn
 
 ### 运行
 
-```bas
+```base
 yarn dev
 ```
 
@@ -60,7 +60,7 @@ yarn dev
 
 接下来计算中心度、选取种子、计算声誉：
 
-```bas
+```base
 yarn preTest
 ```
 

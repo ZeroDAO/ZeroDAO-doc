@@ -6,7 +6,7 @@ category: Experience
 
 ## Connect to Polkadot.js
 
-Once the node is running, open a browser and enter the link：https://polkadot.js.org/apps/#/explorer ，Click on "Development" and select "Local Node" 。To use it for the first time, you need to add the contents of the [types.json](https://github.com/ZeroDAO/ZeroDAO-node/types/types.json) file to "Settings" - "Developers".
+Once the node is running, open a browser and enter the link：https://polkadot.js.org/apps/#/explorer ，Click on "Development" and select "Local Node" 。To use it for the first time, you need to add the contents of the [types.json](https://github.com/ZeroDAO/ZeroDAO-node/blob/main/types/types.json) file to "Settings" - "Developers".
 
 ![](../../image/polkadotjs.png)
 
