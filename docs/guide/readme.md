@@ -8,7 +8,7 @@ category: Quick start
 
 ### Setup rust
 
-```base
+```bash
 curl https://sh.rustup.rs -sSf | sh
 rustup update stable
 ```
@@ -17,13 +17,13 @@ rustup update stable
 
 #### Mac
 
-```base
+```bash
 brew install cmake pkg-config openssl git llvm
 ```
 
 #### Linux
 
-```base
+```bash
 sudo apt install cmake pkg-config libssl-dev git clang libclang-dev
 ```
 
@@ -35,7 +35,7 @@ ZeroDAO is based on Substrate, for more information please go to [Substrate](htt
 
 ## Installation
 
-```base
+```bash
 git clone https://github.com/ZeroDAO/ZeroDAO-node
 cd ZeroDAO-node
 make init
@@ -43,18 +43,18 @@ make init
 
 ## Compilation
 
-```base
+```bash
 make build-release
 ```
 
 ## Run node
 
-```base
+```bash
 make run-dev
 ```
 
 ## Purge the development chain
 
-```base
+```bash
 make purge-dev
 ```

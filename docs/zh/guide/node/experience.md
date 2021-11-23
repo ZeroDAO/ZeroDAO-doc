@@ -18,7 +18,7 @@ category: 体验
 
 ### 安装
 
-```base
+```bash
 git clone https://github.com/ZeroDAO/experience-app
 cd experience-app
 yarn
@@ -26,7 +26,7 @@ yarn
 
 ### 运行
 
-```base
+```bash
 yarn dev
 ```
 
@@ -60,7 +60,7 @@ yarn dev
 
 接下来计算中心度、选取种子、计算声誉：
 
-```base
+```bash
 yarn preTest
 ```
 

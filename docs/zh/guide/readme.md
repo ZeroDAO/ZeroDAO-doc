@@ -8,7 +8,7 @@ category: 快速开始
 
 ### 安装 Rust
 
-```base
+```bash
 curl https://sh.rustup.rs -sSf | sh
 rustup update stable
 ```
@@ -17,13 +17,13 @@ rustup update stable
 
 #### Mac
 
-```base
+```bash
 brew install cmake pkg-config openssl git llvm
 ```
 
 #### Linux
 
-```base
+```bash
 sudo apt install cmake pkg-config libssl-dev git clang libclang-dev
 ```
 
@@ -35,7 +35,7 @@ ZeroDAO 基于 Substrate 开发，了解更多请至 [Substrate](https://docs.su
 
 ## 安装
 
-```base
+```bash
 git clone https://github.com/ZeroDAO/ZeroDAO-node
 cd ZeroDAO-node
 make init
@@ -43,18 +43,18 @@ make init
 
 ## 编译
 
-```base
+```bash
 make build-release
 ```
 
 ## 运行节点
 
-```base
+```bash
 make run-dev
 ```
 
 ## 清除开发链
 
-```base
+```bash
 make purge-dev
 ```

@@ -18,7 +18,7 @@ If you need a deeper experience with ZeroDAO-node, or to compute some social gra
 
 ### Installation
 
-```b
+```bash
 git clone https://github.com/ZeroDAO/experience-app
 cd experience-app
 yarn
@@ -26,7 +26,7 @@ yarn
 
 ### Run
 
-```bas
+```bash
 yarn dev
 ```
 
@@ -60,7 +60,7 @@ The trust relationship is stored. The format is
 
 Next, calculate centrality, select seeds, and calculate reputation.
 
-```bas
+```bash
 yarn preTest
 ```
 
