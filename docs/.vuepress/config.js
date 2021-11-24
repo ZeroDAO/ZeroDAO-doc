@@ -268,4 +268,13 @@ module.exports = config({
       },
     },
   },
+
+  plugins: [
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'G-WQME70JS71'
+      }
+    ]
+  ]
 });
