@@ -4,13 +4,13 @@ category: Introduction
 
 # Introduction
 
-ZeroDAO Network is a DAO network belonging to all Web3(or Metaverse) builders. The goal of all network mechanisms of ZeroDAO Network is to ensure sustainable and high-intensity innovation while maintaining a fair distribution of resources.
+ZeroDAO Network is a DAO network belonging to all Web3 (or Metaverse) builders. The goal of all network mechanisms of ZeroDAO Network is to ensure sustainable and high-intensity innovation while maintaining a fair distribution of resources.
 
 ## Ideal
 
 ### Rational and elegant
 
-THe name of ZeroDAO comes from a formular: 0º = 1. We hope to continuously create new possibilities from zero to one in a retional and elegant way.
+The name of ZeroDAO comes from a formula: 0º = 1. We hope to continuously create new possibilities from zero to one in a rational and elegant way.
 
 ###  Reality interface
 
@@ -30,5 +30,5 @@ Create or improve the application layer protocol, or participate in the discussi
 
 ### Application
 
-Don't worry about your ideas being too crazy, let the crazy ideas eventually become products that people are accustomed to, this is exactly what we are doing. Based on social networks and reputation system, ZeroDAO will comprehensively promote the application of Web3 and Metaverse. You can coolaborate through the DAO to come up with an idea for broader discussion and support, or you can make a thoughtful proposal to request collaboration, or you and your team can directly create an application.
+Don't worry about your ideas being too crazy, let the crazy ideas eventually become products that people are accustomed to, this is exactly what we are doing. Based on social networks and reputation system, ZeroDAO will comprehensively promote the application of Web3 and Metaverse. You can collaborate through the DAO to come up with an idea for broader discussion and support, or you can make a thoughtful proposal to request collaboration, or you and your team can directly create an application.
 
