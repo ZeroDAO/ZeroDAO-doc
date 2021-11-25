@@ -1,0 +1,2636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
+  <id>https://docs.zerodao.net/</id>
+  <title>Docs</title>
+  <subtitle>User-friendly Web3</subtitle>
+  <author>
+    <name>ZeroDAO</name>
+  </author>
+  <updated>2021-11-25T01:03:01.226Z</updated>
+  <generator>@mr-hope/vuepress-plugin-feed</generator>
+  <link rel="self" href="https://docs.zerodao.net/atom.xml"/>
+  <link rel="alternate" href="https://docs.zerodao.net/"/>
+  <rights>Copyright by ZeroDAO</rights>
+  <category term="Challenging reputation"/>
+  <category term="Challenge seeds"/>
+  <category term="Challenge Game"/>
+  <category term="Access to data"/>
+  <category term="Refreshing reputation"/>
+  <category term="Eco-building"/>
+  <category term="Important Resources"/>
+  <category term="Seed selection"/>
+  <category term="Introduction"/>
+  <category term="Road Map"/>
+  <category term="Quick start"/>
+  <category term="Social Finance"/>
+  <category term="Experience"/>
+  <category term="Zero-cost Payment"/>
+  <category term="挑战游戏"/>
+  <category term="声誉挑战"/>
+  <category term="Application guide"/>
+  <category term="体验"/>
+  <category term="Social Currency"/>
+  <category term="种子挑战"/>
+  <category term="获取数据"/>
+  <category term="刷新声誉"/>
+  <category term="生态构建"/>
+  <category term="重要资源"/>
+  <category term="路线图"/>
+  <category term="简介"/>
+  <category term="应用指南"/>
+  <category term="社交金融"/>
+  <category term="社交货币"/>
+  <category term="零损失支付"/>
+  <category term="种子选取"/>
+  <category term="快速开始"/>
+  <contributor>
+    <name>ZeroDAO</name>
+  </contributor>
+  <entry>
+    <title type="html">Challenging reputation</title>
+    <id>https://docs.zerodao.net/guide/challenge/reputation-challenge/</id>
+    <link href="https://docs.zerodao.net/guide/challenge/reputation-challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="challenging-reputation"> Challenging reputation</h1>
+<h2 id="launching-the-challenge"> Launching the challenge</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>challenge</span><span>(</span>target<span>,</span>pathfinder<span>,</span>quantity<span>,</span>score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>pathfinder</td>
+<td>String</td>
+<td><code>pathfinder</code> address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>Total number of paths</td>
+<td>311</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>New reputation value</td>
+<td>136</td>
+</tr>
+</tbody>
+</table>
+<p>The amount of staking will be automatically deducted when the challenge is initiated. You need to upload <code>quantity</code> of data after initiating the adjustment, if you fail to upload enough data on time, you will be judged to have failed. The total <code>score</code> must be equal to the sum of the scores of all paths uploaded, otherwise it cannot be uploaded.</p>
+<h2 id="upload-data"> Upload data</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>challengeUpdate</span><span>(</span>target<span>,</span>seeds<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>seeds</td>
+<td>Array&lt;String&gt;</td>
+<td>Collection of seed addresses</td>
+<td>['133...Ms9']</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>Collection of paths</td>
+<td>[{ nodes: ['1Ew...bknA'] , score: 12}]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Path</strong></p>
+<ul>
+<li><code>nodes</code> - Nodes that do not contain <code>seed</code> and <code>target</code></li>
+<li><code>score</code> - The score of the path, which cannot be <code>0</code></li>
+</ul>
+<div><p>Note</p>
+<p><code>seeds</code> and <code>paths</code> need to correspond in order.</p>
+</div>
+<p>Challenges, arbitrations all use this interface to upload data and support <em>breakpoints</em>. If the data is large and difficult to pack, or if the network is congested, you can try to divide it into several uploads, but the interval should not exceed the system setting.</p>
+<h2 id="arbitration"> Arbitration</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>arbitral</span><span>(</span>target<span>,</span>seeds<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>seeds</td>
+<td>Array&lt;String&gt;</td>
+<td>Collection of seed addresses</td>
+<td>['133...Ms9']</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>Collection of paths</td>
+<td>[{ nodes: ['1Ew...bknA'] , score: 12}]</td>
+</tr>
+</tbody>
+</table>
+<p>Upload all the correct paths.</p>
+<ul>
+<li>The interface also supports <em>breakpoint uploads</em>. It can be called repeatedly during the upload protection period, only one collateral is required and no other challenger can arbitrate again, beyond the protection period the restriction will be lifted.</li>
+<li><code>seeds</code> and <code>paths</code> need to be in order</li>
+<li>Ensure that all incorrect data for <code>pathfinder</code> is corrected</li>
+<li><code>score</code> is allowed to be <code>0</code></li>
+</ul>
+<h2 id="withdrawal-of-earnings"> Withdrawal of earnings</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>harvestChallenge</span><span>(</span>target<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Challenging reputation"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Challenge seeds</title>
+    <id>https://docs.zerodao.net/guide/challenge/seed-challenge/</id>
+    <link href="https://docs.zerodao.net/guide/challenge/seed-challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="challenge-seeds"> Challenge seeds</h1>
+<h2 id="launching-the-challenge"> Launching the challenge</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>challenge</span><span>(</span>target<span>,</span>pathfinder<span>,</span>quantity<span>,</span>score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>New centrality score</td>
+<td>136</td>
+</tr>
+</tbody>
+</table>
+<p>The amount of <code>staking</code> will be automatically deducted when a challenge is initiated. After a challenge has been successfully launched, <code>pathfinder</code> must reply within a set time frame.</p>
+<h2 id="reply-hash"> Reply Hash</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyHash</span><span>(</span>target<span>,</span>hashs<span>,</span>quantity<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>hashs</td>
+<td>Array&lt;PostResultHash&gt;</td>
+<td>he <code>PostResultHash</code> collection</td>
+<td>[[[1,a3],134], ...]</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>Total number of uploads</td>
+<td>311</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PostResultHash</strong> : <code>[[u8; 2],u64]</code> ,This is a tuple of <code>Order</code> and <code>score</code>. You can find it in <a href="../../learn/challenge-games">here</a> to find out how to get the <code>Order</code> and the score.</p>
+<p>Launching a challenge will automatically deduct the amount of the staking. You will need to upload <code>quantity</code> of data after initiating an adjustment, and failure to upload enough data on time will result in a failure.</p>
+<h2 id="continuation-hash"> Continuation hash</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyHashNext</span><span>(</span>target<span>,</span>hashs<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Supports <em>breakpoint</em> transfer of <code>PostResultHash</code> result sets.</p>
+<h2 id="examine"> Examine</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>examine</span><span>(</span>target<span>,</span>index<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>Index of data for questioning</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>After all the <code>pathfinder</code> uploads have been completed, the challenger will need to find errors in them and initiate a <code>Examine</code>.</li>
+<li>After reaching the maximum depth, the <code>Examine</code> refers to the total number of incorrect paths.</li>
+<li>When a <code>Examine</code> is received, <code>pathfinder</code> must reply on time or the system will fail it.</li>
+</ul>
+<h2 id="reply-path"> Reply path</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyPath</span><span>(</span>target<span>,</span>paths<span>,</span>quantity<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>Index of data for questioning</td>
+<td>[{ nodes: [...],total: 10}, ...]</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>Total number of uploads</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Path</strong></p>
+<ul>
+<li><code>nodes</code> - An array of user addresses in the path</li>
+<li><code>total</code> - Number of all shortest paths from the source node to the target node</li>
+</ul>
+<h2 id="continuation-path"> Continuation path</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyPathNext</span><span>(</span>target<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="reply-total-number-of-paths"> Reply Total number of paths</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyNum</span><span>(</span>target<span>,</span>mid_paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>mid_paths</td>
+<td>Array&lt;Array&lt;String&gt;&gt;</td>
+<td>Paths that do not contain endpoints</td>
+<td>[['133Hke...LMs9','14ShU...P721N'], ...]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The challenger will initiate this <code>Examine</code> if the path total is too large, and <code>pathfinder</code> will need to reply to the path total on time.</li>
+<li>At this point the path endpoints are known and we only need to upload the in-between parts. For example, if <code>A-B-C-D</code> is interrogated with endpoints <code>A</code> and <code>D</code>, upload the intermediate nodes of all shortest paths between <code>A</code> and <code>D</code>:[b,d].</li>
+</ul>
+<h2 id="evidence-of-lost-hash"> Evidence of lost hash</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>missedInHashs</span><span>(</span>target<span>,</span>nodes<span>,</span>index<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>nodes</td>
+<td>Array&lt;String&gt;</td>
+<td>The shortest path through <code>target</code></td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>Missing <code>Order</code> position</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>After <code>pathfinder</code> <code>Reply</code> to a hash that does not contain the challenger's <code>Order</code>, the challenger may call <code>missedInHashs</code> to show evidence of the path. For example, <code>pathfinder</code> uploads the following hash data:</p>
+<table>
+<thead>
+<tr>
+<th>Order</th>
+<th><strong>score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0,1]</td>
+<td>12</td>
+</tr>
+<tr>
+<td>[0,3]</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>The challenger has a path with Order <code>[0,2]</code>. The challenger only needs to produce a path that satisfies the condition, with <code>index</code> of <code>1</code>. The evidence presented is subject to arbitration, since the system cannot determine whether the shortest path here is actually the shortest.</p>
+<h2 id="evidence-of-lost-paths"> Evidence of lost paths</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>missedInPaths</span><span>(</span>target<span>,</span>nodes<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>nodes</td>
+<td>Array&lt;String&gt;</td>
+<td>The shortest path through <code>target</code></td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+</tbody>
+</table>
+<p>After <code>pathfinder</code> has uploaded a path, the challenger presents <code>FullOrder</code> consistent with the missing path as evidence. The evidence produced is subject to arbitration, as the system cannot determine whether the shortest path here is actually the shortest.</p>
+<h2 id="evidence-of-non-shortest-paths"> Evidence of non-shortest paths</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>evidenceOfShorter</span><span>(</span>target<span>,</span>index，mid_paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>Index in the path set</td>
+<td>3</td>
+</tr>
+<tr>
+<td>mid_path</td>
+<td>Array&lt;String&gt;</td>
+<td>Nodes that do not contain endpoints</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+</tbody>
+</table>
+<p><code>pathfinder</code> After uploading a path, the challenger presents a shorter path. Endpoints are known, only intermediate nodes need to be uploaded. <code>evidenceOfShorter</code> has full proof power and does not need to be arbitrated.</p>
+<h2 id="total-number-of-incorrect-paths"> Total number of incorrect paths</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>numberTooLow</span><span>(</span>target<span>,</span>index，mid_path<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>Index in the path set</td>
+<td>3</td>
+</tr>
+<tr>
+<td>mid_paths</td>
+<td>Array&lt;Array&lt;String&gt;&gt;</td>
+<td>Nodes that do not contain endpoints</td>
+<td>[['133Hke...LMs9','14ShU...P721N'], ...]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Challenger showed more paths to prove that the original number was too small.</li>
+<li>The challenger can upload a maximum of <code>100</code> data, which is sufficient to invalidate the path.</li>
+<li>Fully probative and not subject to arbitration.</li>
+</ul>
+<h2 id="invalidation-of-evidence"> Invalidation of evidence</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>invalidEvidence</span><span>(</span>target<span>,</span>mid_path，score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>mid_path</td>
+<td>Array&lt;String&gt;</td>
+<td>Nodes that do not contain endpoints</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>New centrality score</td>
+<td>1231</td>
+</tr>
+</tbody>
+</table>
+<p>For arbitration of evidence produced by <code>missedInPaths</code> or <code>missedInHashs</code>, the arbiter needs to upload a shorter path.</p>
+<ul>
+<li>If the path passes through <code>target</code> , then both <code>pathfinder</code> and <code>challenger</code> are proven wrong and the arbiter will act as the new <code>pathfinder</code> and the uploaded <code>score</code> will be challenged by the other challengers.</li>
+<li>If the path does not go through <code>target</code>, <code>challenger</code> fails and <code>pathfinder</code> and the arbiter will share the money in the pool equally as co-beneficiaries.</li>
+<li>The system will automatically staking.</li>
+</ul>
+<h2 id="withdrawal-of-earnings"> Withdrawal of earnings</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>harvestChallenge</span><span>(</span>target<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>name</strong></th>
+<th><strong>type</strong></th>
+<th><strong>description</strong></th>
+<th><strong>example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Target user address</td>
+<td>'133...Ms9'</td>
+</tr>
+</tbody>
+</table>
+<p>The winning side withdraws the proceeds.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Challenge seeds"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Challenge Game</title>
+    <id>https://docs.zerodao.net/guide/challenge/</id>
+    <link href="https://docs.zerodao.net/guide/challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="challenge-game"> Challenge Game</h1>
+<p>The following are the key concepts of a challenge game, a complete challenge consists of the following parts:</p>
+<ul>
+<li><code>launch</code> - Launching the challenge</li>
+<li><code>examine</code> - Challenger question pathfinder's data</li>
+<li><code>reply</code> - Trailblazer replies to Challenger's question</li>
+<li><code>evidence</code> - The challenger produces evidence, which does not necessarily have full probative value and which may require arbitration</li>
+<li><code>arbitral</code> - Arbitration of the evidence produced</li>
+<li><code>harvest</code> - Withdrawal of challenge proceeds</li>
+</ul>
+<p>In practice, a challenge can start at any one of these steps after it has been initiated, or it can jump from one step to another. In a reputation challenge, for example, there are no <code>examine</code> and <code>reply</code> steps. <code>harvest</code> is settled according to the current progress and status.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Reply</th>
+<th>Examine</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Done</td>
+<td>pathfinder</td>
+<td>pathfinder</td>
+<td>challenger</td>
+<td>challenger</td>
+</tr>
+<tr>
+<td>Disruption</td>
+<td>pathfinder</td>
+<td>challenger</td>
+<td>challenger</td>
+<td>pathfinder</td>
+</tr>
+</tbody>
+</table>
+<p>The only difference is <code>arbitral</code>, which divides the pool equally between <code>pathfinder</code> and <code>challenger</code> if there are co-beneficiaries.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Challenge Game"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Access to data</title>
+    <id>https://docs.zerodao.net/guide/reputation/</id>
+    <link href="https://docs.zerodao.net/guide/reputation/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="access-to-data"> Access to data</h1>
+<p>We use the interface provided by <code>polkadot.js</code> to demonstrate this, you can get more information <a href="https://polkadot.js.org/docs/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<h2 id="get-a-reputation"> Get a reputation</h2>
+<p>The chain holds the last two updates of the user's reputation.</p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdReputation<span>.</span><span>reputationScores</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        nonce<span>:</span> <span>12</span><span>,</span>
+        score<span>:</span> <span>1233</span>
+    <span>}</span><span>,</span>
+    <span>{</span>
+        nonce<span>:</span> <span>9</span><span>,</span>
+        score<span>:</span> <span>1233</span>
+    <span>}</span>
+<span>]</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><p><code>nonce</code> is the number of times the reputation system has been updated, you also need to get the system running status.</p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdReputation<span>.</span><span>systemInfo</span><span>(</span><span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>{</span>
+  nonce<span>:</span> <span>12</span>
+  last<span>:</span> <span>156</span>
+  next<span>:</span> <span>140</span>
+  period<span>:</span> <span>100</span>
+  step<span>:</span> Free
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>If the <code>nonce</code> of a reputation value exceeds the system <code>nonce</code> during a system refresh, this means that the reputation has not been confirmed. A user's <code>nonce</code> that is too small may mean that the user has not been active recently, or other unforeseen circumstances. You can also trust this reputation value if you do not require a high security factor, for example in a movie rating application. If the application is in the financial category, the risk of trusting this reputation value should be carefully assessed.</p>
+<h2 id="trusted-relationships"> Trusted relationships</h2>
+<p>You can obtain the latest trust relationships of your users by.</p>
+<div><pre><code><span>const</span> trustedList <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdTrust<span>.</span><span>trustedList</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>This will return an array of <code>address</code>, which is sufficient if you're using it to build social applications. But if you're using it to calculate reputation values and pick seeds, you'll also need to get <code>trustTempList</code>:</p>
+<div><pre><code><span>const</span> trustTempList <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdTrust<span>.</span><span>trustTempList</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>{</span>
+    trust<span>:</span> <span>[</span><span>]</span><span>,</span>
+    untrust<span>:</span> <span>[</span><span>]</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>This is used to cache the user's trust relationship before the system is refreshed, and if the user untrusts during the refresh period, it will be cached in <code>trust</code>. Therefore, you need to exclude <code>untrust</code> from <code>trustedList</code> and merge <code>trust</code>. The resulting data can then be used to calculate reputation and select seeds.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Access to data"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Refreshing reputation</title>
+    <id>https://docs.zerodao.net/guide/reputation/reputation/</id>
+    <link href="https://docs.zerodao.net/guide/reputation/reputation/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="refreshing-reputation"> Refreshing reputation</h1>
+<p>Reputation values can be easily calculated using generic calculation frameworks, such as</p>
+<ul>
+<li>
+<p><a href="https://neo4j.com/" target="_blank" rel="noopener noreferrer">Neo4j</a> - Java-based graph database and computational framework</p>
+</li>
+<li>
+<p><a href="https://github.com/networkx/networkx" target="_blank" rel="noopener noreferrer">networkx</a> - Notable Python libraries</p>
+</li>
+<li>
+<p><a href="https://js.cytoscape.org/" target="_blank" rel="noopener noreferrer">Cytoscape.js</a> - Based on JavaScript</p>
+</li>
+<li>
+<p><a href="https://github.com/graphology/graphology" target="_blank" rel="noopener noreferrer">graphology</a> - Based on JavaScript</p>
+</li>
+<li>
+<p><a href="http://spark.apache.org/" target="_blank" rel="noopener noreferrer">Spark</a> - Computational engine, which you will need when ZeroDAO gets big</p>
+</li>
+</ul>
+<h2 id="update-path-weights"> Update path weights</h2>
+<p>The path weights are calculated using the system's reputation from the previous period, calculated as</p>
+<p class='katex-block'><span><span><span><i>Not supported content</i></span><span aria-hidden="true"><span><span style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span style="margin-right:0.13889em;">W</span><span>e</span><span>i</span><span style="margin-right:0.03588em;">g</span><span>t</span><span><span>h</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span><span>ab</span></span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2777777777777778em;"></span><span>=</span><span style="margin-right:0.2777777777777778em;"></span></span><span><span style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span style="margin-right:0.10764em;">f</span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>,</span><span style="margin-right:0.16666666666666666em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span style="margin-right:0.16666666666666666em;"></span><span><span style="top:0em;"><span>{</span></span><span><span><span><span><span><span style="height:1.69em;"><span style="top:-3.69em;"><span style="height:3.008em;"></span><span><span>ln</span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2222222222222222em;"></span><span>−</span><span style="margin-right:0.2222222222222222em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span>,</span></span></span><span style="top:-2.25em;"><span style="height:3.008em;"></span><span><span>1</span><span>,</span></span></span></span><span>​</span></span><span><span style="height:1.19em;"><span></span></span></span></span></span><span style="width:1em;"></span><span><span><span><span style="height:1.69em;"><span style="top:-3.69em;"><span style="height:3.008em;"></span><span><span>i</span><span style="margin-right:0.10764em;">f</span><span> </span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2222222222222222em;"></span><span>−</span><span style="margin-right:0.2222222222222222em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span style="margin-right:0.2777777777777778em;"></span><span>&gt;</span><span style="margin-right:0.2777777777777778em;"></span><span>e</span></span></span><span style="top:-2.25em;"><span style="height:3.008em;"></span><span><span>e</span><span style="margin-right:0.01968em;">l</span><span>se</span><span> </span></span></span></span><span>​</span></span><span><span style="height:1.19em;"><span></span></span></span></span></span></span></span><span></span></span></span></span></span></span></p>
+<p>For the engineering implementation, we rounded down and set the maximum weight to <code>8</code> , facilitating us to take approximations more efficiently and avoid calculating the natural logarithm on the chain.</p>
+<h2 id="get-shortest-path"> Get shortest path</h2>
+<p>After importing the path weights into your database, you can then find the weighted shortest path of the directed graph from the seed node to all other nodes. In some computational frameworks it may be necessary to save the results of the shortest path as a file before proceeding to the next step in the calculation. This is more efficient and prepares you for the challenge game.</p>
+<h2 id="calculating-reputation"> Calculating reputation</h2>
+<p>The shortest path from the seed to the target node, iteratively computing the reputation, with the initial reputation value of the seed being the constant <code>INIT_SEED_RANK</code>.</p>
+<p>The calculation formula is</p>
+<p class='katex-block'><span><span><span><i>Not supported content</i></span><span aria-hidden="true"><span><span style="height:0.83333em;vertical-align:-0.15em;"></span><span style="margin-right:0.05764em;">S</span><span style="margin-right:0.02778em;">cor</span><span><span>e</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>b</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2777777777777778em;"></span><span>=</span><span style="margin-right:0.2777777777777778em;"></span></span><span><span style="height:2.47044em;vertical-align:-0.8804400000000001em;"></span><span><span></span><span><span><span><span style="height:1.5899999999999999em;"><span style="top:-2.314em;"><span style="height:3em;"></span><span><span style="margin-right:0.13889em;">T</span><span style="margin-right:0.02778em;">r</span><span>u</span><span>s</span><span style="margin-right:0.07153em;">tC</span><span>o</span><span>u</span><span>n</span><span><span>t</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.13889em;">W</span><span>e</span><span>i</span><span style="margin-right:0.03588em;">g</span><span>t</span><span><span>h</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span><span>ab</span></span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span style="height:3em;"></span><span style="border-bottom-width:0.04em;"></span></span><span style="top:-3.74em;"><span style="height:3em;"></span><span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span>​</span></span><span><span style="height:0.8804400000000001em;"><span></span></span></span></span></span><span></span></span></span></span></span></span></p>
+<ul>
+<li><code>TrustCount</code> - Number of users trusted by the source node, with a minimum value of constant on the engineering implementation <code>MIN_TRUST_COUNT</code></li>
+<li><code>Weigth</code> - Path weights</li>
+</ul>
+<p>Finally we sum up the results of all the seed calculations to obtain the final reputation of the user.</p>
+<h2 id="refreshing-reputation-2"> Refreshing reputation</h2>
+<p>Once the reputation has been calculated, you can refresh the user's reputation via the <code>tx.zdRefreshReputation.refresh()</code> interface, which allows you to refresh the reputation of multiple users in bulk. The system will automatically deduct the staking amount and you need to ensure that you have a sufficient balance. Parameters of the interface</p>
+<div><pre><code><span>[</span><span>[</span>address<span>,</span>reputation<span>]</span><span>]</span>
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="receive-benefits"> Receive benefits</h2>
+<p>The last reputation you refreshed is confirmed before you can collect the proceeds. Call the interface <code>tx.zdRefreshReputation.harvestRefAll()</code> , it does not need to pass any parameters and the system will send you all your staking amounts and refreshed earnings.</p>
+<p>Instead of collecting each seed once, as you do with seed proceeds, you collect them all at once, which significantly reduces the consumption of resources in the chain.</p>
+<p>Reputation updates are earned by multiplying the total amount of social currency for that user by the fee rate, so it's a good strategy for you to prioritise those users with higher social currency balances. For the reputation system, this will reflect the user's activity level.</p>
+<p>It should also be noted that some users do not have enough social currency, but still need to update their reputation values. <code>pathfinder</code> can open access to paid updates.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Refreshing reputation"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Eco-building</title>
+    <id>https://docs.zerodao.net/learn/getting-started/architecture/</id>
+    <link href="https://docs.zerodao.net/learn/getting-started/architecture/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="eco-building"> Eco-building</h1>
+<p><img src="./../../image/st.png" alt="" /></p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Eco-building"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Important Resources</title>
+    <id>https://docs.zerodao.net/learn/getting-started/resources/</id>
+    <link href="https://docs.zerodao.net/learn/getting-started/resources/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="important-resources"> Important Resources</h1>
+<ul>
+<li><a href="https://substrate.dev/" target="_blank" rel="noopener noreferrer">Substrate</a> - As the underlying framework for the ZeroDAO-node build.</li>
+<li><a href="https://polkadot.js.org/apps" target="_blank" rel="noopener noreferrer">Polkadot-JS Apps</a> - The UI for interacting with the Substrate node.</li>
+<li><a href="https://polkadot.js.org/docs/" target="_blank" rel="noopener noreferrer">Polkadot-JS Docs</a> - A library for interacting with Substrate nodes.</li>
+<li><a href="https://github.com/ZeroDAO" target="_blank" rel="noopener noreferrer">ZeroDAO Github</a>.</li>
+</ul>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Important Resources"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Seed selection</title>
+    <id>https://docs.zerodao.net/guide/reputation/seeds/</id>
+    <link href="https://docs.zerodao.net/guide/reputation/seeds/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="seed-selection"> Seed selection</h1>
+<p>In the latest version, the Betweenness centrality algorithm is used to select seeds. Because Betweenness centrality is more widely used, you can make efficient use of a computational framework with which you are familiar. At a later stage the algorithm will be adapted to use a pruned relational map to reduce the amount of data in the chain.</p>
+<h2 id="betweenness-centrality"> Betweenness centrality</h2>
+<p>Betweenness centrality reflects the role of the user as a bridge in the network; the more shortest paths through a node, the higher the centrality. This paper focuses more on describing where the differences with common computational frameworks lie.</p>
+<p><img src="./../../image/seed.png" alt="" /></p>
+<p>Calculating the centrality of point <code>C</code> in the above diagram, we obtain all shortest paths through <code>C</code>, the number of shortest paths between endpoints, and calculate the final score.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Shortest paths</th>
+<th style="text-align:left">Total</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">A - B - C - E</td>
+<td style="text-align:left">2</td>
+<td>50</td>
+</tr>
+<tr>
+<td style="text-align:left">A - B - D - E</td>
+<td style="text-align:left">2</td>
+<td>50</td>
+</tr>
+<tr>
+<td style="text-align:left">B - C - E</td>
+<td style="text-align:left">1</td>
+<td>100</td>
+</tr>
+<tr>
+<td style="text-align:left">D - C - E</td>
+<td style="text-align:left">1</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>The paths <code>A - B - C - E</code> and since there are <code>2</code> shortest paths between endpoints <code>A</code> and <code>E</code>, the respective scores are <code>100 / 2 = 50</code>. Here <code>100</code> is precision, meaning that two decimal places are retained, so that the data is invalid when it is greater than or equal to <code>100</code>.</p>
+<p>Therefore, you should not use the Betweenness centrality data directly from any generic computing framework; they have accuracy problems and many of them use approximate algorithms. You can use them to quickly calculate a provisional centrality, find the batch of nodes with the highest centrality as seeds, then calculate all the shortest paths of each seed node from all other nodes, and finally calculate the exact score.</p>
+<div><p>Tips</p>
+<p>The maximum number of seeds is obtained by the constant <code>maxSeedCount</code> and seed nodes with too low a score for uploading will not receive the reward. If the last ranked score is the same, the time to receive the reward will be determined.</p>
+</div>
+<div><p>Tips</p>
+<p>Before adding seed candidates, you should have data ready for the challenge so that you do not miss the window in time to prepare the data and cause unnecessary damage. If your data is accurate, however, this should be very rare as there are other users who correct the wrong challenge.</p>
+</div>
+<h2 id="adding-seed-candidates"> Adding seed candidates</h2>
+<p>Once you have identified a seed, you can add a seed candidate by calling <code>zdRefreshSeeds.add(target, score)</code>. You need to ensure that your account balance is sufficiently collateralised and the system will automatically deduct it.</p>
+<h2 id="receive-benefits"> Receive benefits</h2>
+<p>The proceeds from seeds need to be collected after all seeds have been confirmed, which requires all challenges against the seeds to be fully completed and collected. Call <code>zdRefreshSeeds.harvestSeed(seed)</code> to collect and the system will send you your staking amount and proceeds.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Seed selection"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Introduction</title>
+    <id>https://docs.zerodao.net/learn/</id>
+    <link href="https://docs.zerodao.net/learn/"/>
+    <updated>2021-11-24T15:58:33.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="introduction"> Introduction</h1>
+<p>ZeroDAO Network is a DAO network belonging to all Web3 (or Metaverse) builders. The goal of all network mechanisms of ZeroDAO Network is to ensure sustainable and high-intensity innovation while maintaining a fair distribution of resources.</p>
+<h2 id="ideal"> Ideal</h2>
+<h3 id="rational-and-elegant"> Rational and elegant</h3>
+<p>The name of ZeroDAO comes from a formula: 0º = 1. We hope to continuously create new possibilities from zero to one in a rational and elegant way.</p>
+<h3 id="reality-interface"> Reality interface</h3>
+<p>The ZeroDAO Network is an interface connecting the Web3 and reality. We cleverly map the real world to the digital world (Web3 or metaverse).Continue to build better collaboration models and distribution mechanisms, and further promote the progress of the real world.</p>
+<h2 id="contribution"> Contribution</h2>
+<p>ZeroDAO collaborates entirely in DAO mode.We lock most of the tokens in DAO, and ZeroDAO Network belongs to those creative and passionate community members.</p>
+<h3 id="research"> Research</h3>
+<p>The development of ZeroDAO Network requires tireless research. From the underlying TIR algorithm, to the collaboration and incentive mechanism of DAO, to the design of Dapp, it needs the promotion of economics, sociology, cybernetics, cryptography and other disciplines theories.。</p>
+<h3 id="application-protocol"> Application protocol</h3>
+<p>Create or improve the application layer protocol, or participate in the discussion, so that the application layer protocol supports the application ecosystem to better collaborate.</p>
+<h3 id="application"> Application</h3>
+<p>Don't worry about your ideas being too crazy, let the crazy ideas eventually become products that people are accustomed to, this is exactly what we are doing. Based on social networks and reputation system, ZeroDAO will comprehensively promote the application of Web3 and Metaverse. You can collaborate through the DAO to come up with an idea for broader discussion and support, or you can make a thoughtful proposal to request collaboration, or you and your team can directly create an application.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Introduction"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Road Map</title>
+    <id>https://docs.zerodao.net/learn/getting-started/roadmap/</id>
+    <link href="https://docs.zerodao.net/learn/getting-started/roadmap/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="road-map"> Road Map</h1>
+<div><p>2021 Q2 MVP</p>
+<p>Verify the feasibility of the project and the effect of the algorithm.</p>
+</div>
+<div><p>2021 Q4 Sky garden, test network</p>
+<p>Alpha test network, including the core TIR algorithm and reputation system, and finally iterated to the full version</p>
+</div>
+<div><p>2021 Q4 Greate navigation, test network</p>
+<p>Support the core capabilities of the DAO network and serve as the main test network</p>
+</div>
+<div><p>2021 Q4 Mobile palace, ecolofical upgrade</p>
+<p>Simulate scenarios on the chain, conduct rapid feasibility verification of multi-domain applications, and conduct on-chain testing and development</p>
+</div>
+<div><p>2022 Q1 Main network online</p>
+<p>Complete support for smart contracts, reputation systems and DAOs</p>
+</div>
+<div><p>2022 Q1 Interstellar Wanderings</p>
+<p>Upgrade the cross-chain capability of the main network</p>
+</div>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Road Map"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Reputation System</title>
+    <id>https://docs.zerodao.net/learn/reputation/</id>
+    <link href="https://docs.zerodao.net/learn/reputation/"/>
+    <updated>2021-11-24T15:58:33.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="reputation-system"> Reputation System</h1>
+<p>The rapid development of the blockchain over the years has shown everyone its extraordinary value.However, the lack of a highly available reputation system hinders further development of the blockchain. A highly available reputation system would bring about at least two changes:</p>
+<p><strong>Robot ≠ Human</strong></p>
+<p>In &quot;Play to Earn&quot; rewards, UBI, even the dark forest of Ethereum, robots earn assets that should belong to users. Without a creditable identity, our economic behavior in the Metaverse will cost extremely high friction and loss. For Web 3.0, how can system return the right to the user if it can not identify whether there is a real person facing the screen or a fake identity?</p>
+<p><strong>Capital ≠ Power</strong></p>
+<p>The community-based blockchain is to a large extent a public resource. Anyone can participate in the governance and anyone can benefit from the development of the community. However, token voting allow the &quot;capital is power&quot; of the real world extends to the Web3. In that case, what is the point of our construction of the Web3, Metaverse?? &quot;Capital is power&quot; also makes the blockchain lose the characteristics of public resource. We need a reliable and long-term reputation identity system to work with a matching DAO mechanism to bring new governance methods.</p>
+<h2 id="how-is-the-zerodao-reputation-system-different"> How is the ZeroDAO Reputation System different?</h2>
+<p>Soon after the birth of blockchain there was a consensus that 'reputation systems' could bring about fundamental change, with attempts at <code>Proof of personhood systems</code>, <code>Proof of participation</code> and <code>Identity Oracle</code>, to name but a few, which were They were either costly, not decentralized enough, or not resistant to <code>Sybil attacks</code>.</p>
+<p>ZeroDAO's reputation system uses a decentralized method to calculate the user's reputation. It represents the user's credibility, influence, and credit. It is a real &quot;decentralized identity&quot;. Extensive streaming social networks enable high reputation coverage. Later, DAO's vertical identity is introduced to form a three-dimensional identity that meets different applications. ZeroDAO will support smart contracts. You can develop and use DAPPs on the ZeroDAO chain to get the blessing of the native reputation system at low cost. As ZeroDAO is the infrastructure of reputation system, you can also cross-chain ZeroDAO's reputation system to other public chains, such as Ethereum or substrate ecology.</p>
+<p>The following is a comparison of the ZeroDAO Reputation System with other categories of reputation systems:</p>
+<p><img src="./../../image/reputation-sys.png" alt="" /></p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Challenge Game</title>
+    <id>https://docs.zerodao.net/learn/reputation/challenge-games/</id>
+    <link href="https://docs.zerodao.net/learn/reputation/challenge-games/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="challenge-game"> Challenge Game</h1>
+<p>Computing the shortest path of a social graph on the chain is resource intensive, but shortest path verification is easy. Taking advantage of this feature we use a challenge game to verify the accuracy of the data.</p>
+<h2 id="roles"> Roles</h2>
+<p>The Challenge Game has three roles: <code>Pathfinder</code>, <code>Challenger</code> and <code>Sweeper</code>.</p>
+<h3 id="pathfinder"> Pathfinder</h3>
+<p>Pathfinder is responsible for selecting the seeds at regular intervals, calculating the reputation of the user and uploading the results to the chain after staking a certain amount. The chain waits for a period of time during which Challenger can challenge the data and prove its results are more credible according to the process. Upon a successful challenge, Challenger will receive collateral funding from Pathfinder. If no challenge is made after the challenge time, Pathfinder can reclaim the collateral funds and receive a reward. On reputation refreshes, the reward is a percentage of the target user's social currency. The reward for a seed refresh is the entire prize pool of funds.</p>
+<h3 id="challenger"> Challenger</h3>
+<p>Challenger is responsible for maintaining the accuracy of the reputation data and seed data on the chain, and can staking a certain amount of money to challenge the data when errors are found. Challenger and Pathfinder are not fixed, as a successful Challenger challenge will result in Pathfinder accepting challenges from other Challengers. A successful challenge will result in the loss of all earnings, including the amount of your own staking. The total amount of rewards is therefore constantly accumulating, which ensures that the system is constantly approximating the authenticity of the data.</p>
+<h3 id="sweeper"> Sweeper</h3>
+<p>To reduce the burden on node operations, all refresh data and challenge game data needs to be cleared by the beneficiaries at the same time as the proceeds are claimed. both Pathfinder and Challenger must keep the data on the chain clean, and if the proceeds are not claimed within a certain period of time, Sweeper can claim them by proxy, at the cost of Sweeper receiving a percentage of the proceeds.</p>
+<h2 id="challenge-reputation"> Challenge Reputation</h2>
+<h3 id="launching-the-challenge"> Launching the challenge</h3>
+<p>Challenger can challenge the Pathfinder's refreshed reputation and upload all valid paths and scores (the score needs to be greater than 0). During the challenge phase, the chain does not verify that the score is calculated correctly, only that the paths are correct, which significantly reduces the amount of computation on the chain. after a successful challenge by Challenger, it enters the arbitration phase.</p>
+<p>Including in the seed challenges below, we support <em>breakpoints</em> in all cases where large amounts of data need to be uploaded, i.e. the results can be uploaded in multiple transactions. This is useful in situations where the data results exceed the block weight, or where the network is congested.</p>
+<h3 id="arbitration"> Arbitration</h3>
+<p>Other Challengers can arbitrate the data by uploading a shorter path or a different value within a defined time. At this point the calculation will be verified on the chain to ensure that all data in the arbitration phase is correct. The Challenger that initiated the arbitration still has to wait for the other Challengers to arbitrate, so the Challenger needs to point out all errors in order for the challenge to be successful.</p>
+<h2 id="challenge-seed"> Challenge Seed</h2>
+<p>First we calculate the seed path according to the seed selection rules. In the current version of ZeroDAO we use <code>Betweenness Centrality</code> to select the seeds, the advantage of this is that <code>Betweenness Centrality</code> is a common algorithm and easy to implement. In later versions, we will use cropped path trees to reduce the amount of computation and on-chain verification. But in any case, as the network becomes very large, the number of shortest paths past the seed user will be very large. Uploading them one by one to the chain for comparison and validation is not necessary. We need some method of indexing that allows Challenger to find and Pathfinder difference paths. That way, we can accurately verify the difference paths on the chain and determine whose data is more trustworthy, Pathfinder or Challenger.</p>
+<h3 id="examine-and-reply"> Examine and Reply</h3>
+<p>The way we find discrepancy data is to form a tree with a sum of data, the deeper it is, the smaller the amount of data it contains, and ultimately the smaller the result set is uploaded to the chain. So we only need a small number of interactions to find the differences. To achieve this, the results of the calculation first need to be processed. The results consist of two aspects: the paths and the scores. We hash the start and end points of the paths</p>
+<p><img src="./../../image/deep.png" alt="" /></p>
+<p>As shown in the diagram, the first tier is the last digit, and we add up the scores with the same value at that position, giving us a maximum of 16 results. The second layer is the last digit and the penultimate digit with the same score, with a maximum of 256 results. challenger needs to find the position where the sum of the scores is different from the 16 values, using a <code>Examine</code> and <code>Reply</code> interaction to reach the final path result. The partitioned path results are smaller and we can verify them exactly on the chain.</p>
+<p>In the current version of the ZeroDAO network, we pick two positions at a time with a maximum depth of 4. This means that we can perform fast verification for paths of at least 256 ^ 4 * n.</p>
+<h3 id="evidence"> Evidence</h3>
+<p>After an error has been found, Challenger can upload evidence. For example, uploading a shorter path to prove that Pathfinder's calculation is wrong. Sometimes the evidence is not strong enough, for example if Challenger uploads a shortest path through seed <code>A</code> with endpoints <code>C</code> and <code>D</code>, which does not exist in Pathfinder's data. However, the system is not sure if there is a shorter path between <code>C</code> and <code>D</code> that does not go through <code>A</code>. In such a case, the evidence would need to be determined by arbitration.</p>
+<h3 id="arbitration-2"> Arbitration</h3>
+<p>Arbitration is a determination of the validity of the evidence. As noted above, other users show a shorter path from <code>C</code> to <code>D</code>, but not through <code>A</code>, in which case Challenger's proof is invalid. The arbitrated users will be co-beneficiaries of Pathfinder and will share equally in the pool of funds.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Quick start</title>
+    <id>https://docs.zerodao.net/guide/</id>
+    <link href="https://docs.zerodao.net/guide/"/>
+    <updated>2021-11-23T06:29:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="quick-start"> Quick start</h1>
+<h2 id="initial-setup"> Initial Setup</h2>
+<h3 id="setup-rust"> Setup rust</h3>
+<div><pre><code><span>curl</span> https://sh.rustup.rs -sSf <span>|</span> <span>sh</span>
+rustup update stable
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><h3 id="you-will-also-need-to-install-the-following-packages"> You will also need to install the following packages:</h3>
+<h4 id="mac"> Mac</h4>
+<div><pre><code>brew <span>install</span> cmake pkg-config openssl <span>git</span> llvm
+</code></pre>
+<div><span>1</span><br></div></div><h4 id="linux"> Linux</h4>
+<div><pre><code><span>sudo</span> <span>apt</span> <span>install</span> cmake pkg-config libssl-dev <span>git</span> clang libclang-dev
+</code></pre>
+<div><span>1</span><br></div></div><div><p>More</p>
+<p>ZeroDAO is based on Substrate, for more information please go to <a href="https://docs.substrate.io/v3/getting-started/overview/" target="_blank" rel="noopener noreferrer">Substrate</a> 。</p>
+</div>
+<h2 id="installation"> Installation</h2>
+<div><pre><code><span>git</span> clone https://github.com/ZeroDAO/ZeroDAO-node
+<span>cd</span> ZeroDAO-node
+<span>make</span> init
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="compilation"> Compilation</h2>
+<div><pre><code><span>make</span> build-release
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="run-node"> Run node</h2>
+<div><pre><code><span>make</span> run-dev
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="purge-the-development-chain"> Purge the development chain</h2>
+<div><pre><code><span>make</span> purge-dev
+</code></pre>
+<div><span>1</span><br></div></div>]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Quick start"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Social Finance</title>
+    <id>https://docs.zerodao.net/learn/social-finance/</id>
+    <link href="https://docs.zerodao.net/learn/social-finance/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="social-finance"> Social Finance</h1>
+<p>A financial system that runs on top of a social currency.</p>
+<p>ZeroDAO wants to give a unique and optimal definition to social currency. We believe that social currency is not just a general concept, but a practical underlying economy for web 3.0 social networks. It does not invent something new, but rather the digitisation of human social value and social interaction.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Social Finance"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Experience</title>
+    <id>https://docs.zerodao.net/guide/node/experience/</id>
+    <link href="https://docs.zerodao.net/guide/node/experience/"/>
+    <updated>2021-11-23T06:29:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="experience"> Experience</h1>
+<h2 id="connect-to-polkadot-js"> Connect to Polkadot.js</h2>
+<p>Once the node is running, open a browser and enter the link：https://polkadot.js.org/apps/#/explorer ，Click on &quot;Development&quot; and select &quot;Local Node&quot; 。To use it for the first time, you need to add the contents of the <a href="https://github.com/ZeroDAO/ZeroDAO-node/blob/main/types/types.json" target="_blank" rel="noopener noreferrer">types.json</a> file to &quot;Settings&quot; - &quot;Developers&quot;.</p>
+<p><img src="./../../image/polkadotjs.png" alt="" /></p>
+<p>Once the connection has been successfully made, you can now see the outgoing blocks.</p>
+<h2 id="experience-app"> Experience.app</h2>
+<p>If you need a deeper experience with ZeroDAO-node, or to compute some social graphs, we offer a front-end to the experience.</p>
+<h3 id="installation"> Installation</h3>
+<div><pre><code><span>git</span> clone https://github.com/ZeroDAO/experience-app
+<span>cd</span> experience-app
+<span>yarn</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="run"> Run</h3>
+<div><pre><code><span>yarn</span> dev
+</code></pre>
+<div><span>1</span><br></div></div><p>Open the URL in your browser http://localhost:8080/ 。</p>
+<h3 id="importing-data"> Importing data</h3>
+<p>The Game of Thrones character relationship test data is built into the <code>experience-app</code>, click on &quot;Tests&quot; in the left hand navigation, click on the &quot;Start&quot; button on the right hand side and the front end will automatically run a simulation to send various types of transactions to the chain. Please be patient as the browser may lag due to the large amount of data.</p>
+<p>Once the data has been imported, you can see all the seeds from the <code>Seeds</code> page and click on them to go to the home page where you can see the character's trust relationships, reputation values and so on. If you have the <code>Polkadot.js</code> browser connected, you should be able to see a lot of transaction information and events.</p>
+<h3 id="customise-your-data"> Customise your data</h3>
+<p>You are advised to customise the data to try out the results of different relational network calculations. You will need to prepare two pieces of data.</p>
+<h4 id="nodes-cvs"> nodes.cvs</h4>
+<p>Stores the user information. The format is</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">USER_ID</td>
+<td style="text-align:left">user name</td>
+</tr>
+</tbody>
+</table>
+<h4 id="edges-cvs"> edges.cvs</h4>
+<p>The trust relationship is stored. The format is</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">source</th>
+<th style="text-align:left">target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">USER_ID_1</td>
+<td style="text-align:left">USER_ID_2</td>
+</tr>
+</tbody>
+</table>
+<p>Next, calculate centrality, select seeds, and calculate reputation.</p>
+<div><pre><code><span>yarn</span> preTest
+</code></pre>
+<div><span>1</span><br></div></div><p>This will automatically calculate all the data and write the results to the <code>data</code> folder. Run <code>yarn dev</code> again and import the data as described above. Now you can experience it in the front-end interface.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Experience"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Zero-cost Payment</title>
+    <id>https://docs.zerodao.net/learn/social-finance/zero-cost-payment/</id>
+    <link href="https://docs.zerodao.net/learn/social-finance/zero-cost-payment/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="zero-cost-payment"> Zero-cost Payment</h1>
+<p>A payment model where the user loses nothing, but the merchant receives money. This is achieved through ZeroDAO's social currency.</p>
+<p><img src="./../../image/0cost.png" alt="" /></p>
+<h2 id="institutional-accounts"> Institutional Accounts</h2>
+<p>A special type of account which can be trusted in the same way as a normal account, the difference being that it only participates in the distribution and not in the calculation of the reputation system. The amount allocated goes directly to the free account and is not reallocated.</p>
+<h2 id="zero-cost"> Zero-cost</h2>
+<p>Social currency was meant to be shared with other users, now it's just one more share, the user doesn't lose anything, but the merchant receives the money. Users are more willing to accept such a payment model, which is a new payment model that can be applied to a variety of scenarios. For example, charities will be able to raise funds better this way and the open source community will receive more funding. In addition, through this model we solve the payment dilemma of decentralised storage.</p>
+<div><p>Tips</p>
+<p>However, it is currently limited to payments to trusted institutions, and large-scale commercial use ( e.g. in pay-per-month music applications, decentralized storage payments ) needs to Solving collusion attack.</p>
+</div>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Zero-cost Payment"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">ZeroDAO Docs</title>
+    <id>https://docs.zerodao.net/</id>
+    <link href="https://docs.zerodao.net/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">挑战游戏</title>
+    <id>https://docs.zerodao.net/zh/guide/challenge/</id>
+    <link href="https://docs.zerodao.net/zh/guide/challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="挑战游戏"> 挑战游戏</h1>
+<p>以下为挑战游戏的关键概念，一个完整的挑战包括以下几部分</p>
+<ul>
+<li><code>launch</code> - 发起挑战</li>
+<li><code>examine</code> - 挑战者向开拓者的数据发起质询</li>
+<li><code>reply</code> - 开拓者回复挑战者的质询</li>
+<li><code>evidence</code> - 挑战者出示证据，证据并不一定拥有完全证明力，它可能需要仲裁</li>
+<li><code>arbitral</code> - 对出示的证据进行仲裁</li>
+<li><code>harvest</code> - 提取挑战收益</li>
+</ul>
+<p>在实际应用中，挑战发起后可从其中任意一步开始，也可以从任意一步跳到另一步。例如在声誉挑战中，并不存在 <code>examine</code> 和 <code>reply</code> 的步骤。<code>harvest</code> 按照当前进度和状态来结算。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Reply</th>
+<th>Examine</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Done</td>
+<td>pathfinder</td>
+<td>pathfinder</td>
+<td>challenger</td>
+<td>challenger</td>
+</tr>
+<tr>
+<td>Disruption</td>
+<td>pathfinder</td>
+<td>challenger</td>
+<td>challenger</td>
+<td>pathfinder</td>
+</tr>
+</tbody>
+</table>
+<p>唯一不同的是 <code>arbitral</code> ，如果有共同受益人，则将池中的资金平分给 <code>pathfinder</code> 和 <code>challenger</code> 。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="挑战游戏"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">声誉挑战</title>
+    <id>https://docs.zerodao.net/zh/guide/challenge/reputation-challenge/</id>
+    <link href="https://docs.zerodao.net/zh/guide/challenge/reputation-challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="声誉挑战"> 声誉挑战</h1>
+<h2 id="发起挑战"> 发起挑战</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>challenge</span><span>(</span>target<span>,</span>pathfinder<span>,</span>quantity<span>,</span>score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>pathfinder</td>
+<td>String</td>
+<td><code>pathfinder</code> 地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>总路径数量</td>
+<td>311</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>新的声誉值</td>
+<td>136</td>
+</tr>
+</tbody>
+</table>
+<p>发起挑战会自动扣除抵押金额。发起调整后需要上传 <code>quantity</code> 条数据，如果未能按时上传足够数据，将被系统判定失败。<code>score</code> 总得分必须和上传的所有路径得分之和相等，否则无法上传。</p>
+<h2 id="上传数据"> 上传数据</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>challengeUpdate</span><span>(</span>target<span>,</span>seeds<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>seeds</td>
+<td>Array&lt;String&gt;</td>
+<td>种子地址集合</td>
+<td>['133...Ms9']</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>路径集合</td>
+<td>[{ nodes: ['1Ew...bknA'] , score: 12}]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Path</strong></p>
+<ul>
+<li><code>nodes</code> - 不包含<code>seed</code> 和 <code>target</code> 的节点</li>
+<li><code>score</code> - 该路径的得分，不可为 <code>0</code></li>
+</ul>
+<div><p>提醒</p>
+<p><code>seeds</code> 和 <code>paths</code> 需要按顺序一一对应。</p>
+</div>
+<p>挑战、仲裁都使用这个接口上传数据，支持断点续传，如果数据较大难以打包，或网络拥堵，可以尝试分为几次上传，但间隔时间不要超过系统设定。</p>
+<h2 id="仲裁"> 仲裁</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>arbitral</span><span>(</span>target<span>,</span>seeds<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>seeds</td>
+<td>Array&lt;String&gt;</td>
+<td>种子地址集合</td>
+<td>['133...Ms9']</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>路径集合</td>
+<td>[{ nodes: ['1Ew...bknA'] , score: 12}]</td>
+</tr>
+</tbody>
+</table>
+<p>上传所有正确的路径。</p>
+<ul>
+<li>该接口同样支持断点续传。在上传保护期内可重复调用，只需要支付一次抵押，并且其他挑战者无法再次仲裁，超过保护期将解除限制。</li>
+<li><code>seeds</code> 和 <code>paths</code> 需要按顺序一一对应</li>
+<li>确保纠正 <code>pathfinder</code> 的所有错误数据</li>
+<li><code>score</code> 可以为 <code>0</code></li>
+</ul>
+<h2 id="提取收益"> 提取收益</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshReputation<span>.</span><span>harvestChallenge</span><span>(</span>target<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="声誉挑战"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Application guide</title>
+    <id>https://docs.zerodao.net/learn/social-finance/applications/</id>
+    <link href="https://docs.zerodao.net/learn/social-finance/applications/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="application-guide"> Application guide</h1>
+<h2 id="creator-economy"> Creator Economy</h2>
+<p>Not all creator economy products should use ICSC or traditional monetary models, and specific models should be carefully considered. However, one principle is certain: ICSC should be used decisively when content incentives may have a negative effect. Some common contribution models are listed below, with corresponding analysis and recommendations.</p>
+<ul>
+<li><strong>Reading time</strong> - The user is rewarded with a Token for reading a certain amount of time, this model uses ICSC as much as possible.</li>
+<li><strong>Fiction</strong> - Paid subscriptions and copyrighted fiction platforms should not use ICSC.</li>
+<li><strong>Information flow</strong> - Traditional social networking information flow models, such as Twitter and Facebook type applications, must use ICSC.</li>
+<li><strong>Podcasts</strong> - ICSC should be the main focus, supplemented by models such as ad share.</li>
+</ul>
+<h2 id="advertising-platforms"> Advertising platforms</h2>
+<p>Traditional blockchain advertising settles attention into Tokens, evolving blockchain advertising into incentive advertising in an extremely narrow scenario. This would evolve into users watching ads in order to get Token, while advertisers need potential customers interested in the product, a paradox that dictates that traditional decentralized advertising platforms cannot be applied at scale. But if the rewards were changed to the ICSC model it would become feasible.</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Application guide"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">体验</title>
+    <id>https://docs.zerodao.net/zh/guide/node/experience/</id>
+    <link href="https://docs.zerodao.net/zh/guide/node/experience/"/>
+    <updated>2021-11-23T06:29:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="体验"> 体验</h1>
+<h2 id="连接-polkadot-js"> 连接 Polkadot.js</h2>
+<p>节点运行后，打开浏览器并输入链接：https://polkadot.js.org/apps/#/explorer ，点击“Development“，选择“Local Node” 。首次使用，你需要将 <a href="https://github.com/ZeroDAO/ZeroDAO-node/blob/main/types/types.json" target="_blank" rel="noopener noreferrer">types.json</a> 文件中的内容添加到 “设置” - “开发者” 中。</p>
+<p><img src="./../../image/polkadotjs.png" alt="" /></p>
+<p>待连接成功后，你可以看到出块情况了。</p>
+<h2 id="experience-app"> Experience.app</h2>
+<p>如果你需要更深度地体验 ZeroDAO-node ，或者计算一些社交图谱，我们提供了一个体验前端。</p>
+<h3 id="安装"> 安装</h3>
+<div><pre><code><span>git</span> clone https://github.com/ZeroDAO/experience-app
+<span>cd</span> experience-app
+<span>yarn</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="运行"> 运行</h3>
+<div><pre><code><span>yarn</span> dev
+</code></pre>
+<div><span>1</span><br></div></div><p>在浏览器中打开网址 http://localhost:8080/ 。</p>
+<h3 id="导入数据"> 导入数据</h3>
+<p><code>experience-app</code> 中内置了 《权力的游戏》 人物关系测试数据，点击左侧导航中的 &quot;Tests&quot; ，在右侧点击 &quot;Start&quot; 按钮，前端将自动运行模拟运行，向链上发送各种类型的交易。因为数据量较大，浏览器可能会卡顿，请耐性等待。</p>
+<p>数据导入完毕后，你可以从 <code>Seeds</code> 页面看到所有的种子信息，点击他们进入主页，可以看到人物的信任关系、声誉值等等。如果你连接了 <code>Polkadot.js</code> 浏览器，你应该可以看到很多交易信息和事件。</p>
+<h3 id="自定义数据"> 自定义数据</h3>
+<p>你最好自定义数据来尝试不同的关系网络计算结果。你需要准备两份数据</p>
+<h4 id="nodes-cvs"> nodes.cvs</h4>
+<p>保存用户信息。格式为</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">USER_ID</td>
+<td style="text-align:left">user name</td>
+</tr>
+</tbody>
+</table>
+<h4 id="edges-cvs"> edges.cvs</h4>
+<p>保存信任关系。格式为</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">source</th>
+<th style="text-align:left">target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">USER_ID_1</td>
+<td style="text-align:left">USER_ID_2</td>
+</tr>
+</tbody>
+</table>
+<p>接下来计算中心度、选取种子、计算声誉：</p>
+<div><pre><code><span>yarn</span> preTest
+</code></pre>
+<div><span>1</span><br></div></div><p>这将自动计算所有数据，并将结果写入 <code>data</code> 文件夹中。再次运行 <code>yarn dev</code> ，并按照前面所述导入数据。现在你可以在前端界面中体验了。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="体验"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">Social Currency</title>
+    <id>https://docs.zerodao.net/learn/social-finance/social-currency/</id>
+    <link href="https://docs.zerodao.net/learn/social-finance/social-currency/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="social-currency"> Social Currency</h1>
+<h2 id="incentive-compatibility"> Incentive compatibility</h2>
+<p>Usually we think that rewarding good things will inspire more good things, but in fact this is not the case, like what would Twitter look like if it was a dollar a tweet? Yet that's exactly what we're doing in the Web3 era, we're issuing currency to reward users who contribute content and interaction to the social network. We shouldn't lose sight of the truth that this doesn't make Web3 social networks any more valuable than traditional social networks.</p>
+<p>The early exploration of social networks in the blockchain was based on the ideal of users as shareholders, contributions as revenue and data as value, but the incentive model of monetising contributions is a big mountain that stands in the way of the ideal. As we run around in social networks to gain currency, social networks give us revenue but take away our joy. ZeroDAO's streaming social network not only gives you the assets you deserve, it also gives you joy. This joy is the joy of growth, the joy of sharing, the joy of helping others, in fact, these long-lost joys have long been written into the &quot;sharing and freedom&quot; DNA of the internet. We aim to create an incentive-compatible social currency.</p>
+<h2 id="incentive-compatible-social-currency-icsc"> Incentive compatible social currency (ICSC)</h2>
+<p>ZeroDAO's social currency, an incentive compatible social currency (<code>ICSC</code>), is still quantified by social networking applications and settled as Token sent to users, for example <code>FacebookToken</code>. However, this social currency cannot be used directly by users and is temporarily frozen.</p>
+<p><img src="./../../image/fp.png" alt="" /></p>
+<ol>
+<li><strong>Settlement</strong> - The app quantifies user contributions and sends them to <code>A</code>s social currency account.</li>
+<li><strong>Share</strong> - The system periodically distributes A's pending distributions to <code>B</code> <code>C</code> <code>D</code> whom it trusts.</li>
+<li><strong>Network</strong> -
+<code>B</code> <code>C</code> <code>D</code> Similarly share the new proceeds to be distributed to form a value analysis network</li>
+</ol>
+<p>Allocated together at intervals by <code>pathfinder</code> when doing a reputation refresh, in the following manner.</p>
+<p><img src="./../../image/sc.png" alt="" /></p>
+<ol>
+<li><strong>Reserved</strong> - Reserve the owner's free balance. The percentage can be adjusted by the community.</li>
+<li><strong>Share</strong> - Transfer to the social currency of users trusted by the owner.</li>
+<li><strong>Fee</strong> - <code>pathfinder</code> fee。</li>
+<li><strong>Burn</strong> - Share to all users.</li>
+<li><strong>Reward pool</strong> - Used to solve the verifier's Dilemma and seeds Refresh.</li>
+</ol>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="Social Currency"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">种子挑战</title>
+    <id>https://docs.zerodao.net/zh/guide/challenge/seed-challenge/</id>
+    <link href="https://docs.zerodao.net/zh/guide/challenge/seed-challenge/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="种子挑战"> 种子挑战</h1>
+<h2 id="发起挑战"> 发起挑战</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>challenge</span><span>(</span>target<span>,</span>pathfinder<span>,</span>quantity<span>,</span>score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>新的中心度得分</td>
+<td>136</td>
+</tr>
+</tbody>
+</table>
+<p>发起挑战会自动扣除抵押金额。挑战成功发起后，<code>pathfinder</code> 必须在设定时间内回复。</p>
+<h2 id="回复哈希"> 回复哈希</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyHash</span><span>(</span>target<span>,</span>hashs<span>,</span>quantity<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>hashs</td>
+<td>Array&lt;PostResultHash&gt;</td>
+<td><code>PostResultHash</code>集合</td>
+<td>[[[1,a3],134], ...]</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>上传的总数量</td>
+<td>311</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PostResultHash</strong> : <code>[[u8; 2],u64]</code> ,这是一个 <code>Order</code> 和 <code>score</code> 组成的元组。你可以在这里了解如何获取 <code>Order</code> 和分值。</p>
+<p>发起挑战会自动扣除抵押金额。发起调整后需要上传 <code>quantity</code> 条数据，如果未能按时上传足够数据，将被系统判定失败。</p>
+<h2 id="续传哈希"> 续传哈希</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyHashNext</span><span>(</span>target<span>,</span>hashs<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>支持断点续传 <code>PostResultHash</code> 结果集。</p>
+<h2 id="质询"> 质询</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>examine</span><span>(</span>target<span>,</span>index<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>质询的数据位置</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>pathfinder</code> 全部上传完成后，挑战者需要从中发现错误，发起质询。</li>
+<li>到达最大深度后，质询指的是错误的路径总量。</li>
+<li>在收到质询后，<code>pathfinder</code> 必须按时回复，否则系统将判定其失败。</li>
+</ul>
+<h2 id="回复路径"> 回复路径</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyPath</span><span>(</span>target<span>,</span>paths<span>,</span>quantity<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>Array&lt;Path&gt;</td>
+<td>质询的数据位置</td>
+<td>[{ nodes: [...],total: 10}, ...]</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>上传的总数量</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Path</strong></p>
+<ul>
+<li><code>nodes</code> - 路径中的用户地址的数组</li>
+<li><code>total</code> - 从源节点到目标节点所有最短路径的数量</li>
+</ul>
+<h2 id="续传路径"> 续传路径</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyPathNext</span><span>(</span>target<span>,</span>paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="回复路径总量"> 回复路径总量</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>replyNum</span><span>(</span>target<span>,</span>mid_paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>mid_paths</td>
+<td>Array&lt;Array&lt;String&gt;&gt;</td>
+<td>不包含端点的路径</td>
+<td>[['133Hke...LMs9','14ShU...P721N'], ...]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>挑战者在认为路径总量过大时会发起这种质询，<code>pathfinder</code> 需要按时回复路径总量。</li>
+<li>此时路径端点是已知的，我们只需要上传之间部分。例如，<code>A-B-C-D</code> 被质询，端点为 <code>A</code> 和 <code>D</code> ，上传 <code>A</code> 和<code>D</code> 之间的所有最短路径的中间节点:[b,d]。</li>
+</ul>
+<h2 id="丢失hash的证据"> 丢失hash的证据</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>missedInHashs</span><span>(</span>target<span>,</span>nodes<span>,</span>index<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>nodes</td>
+<td>Array&lt;String&gt;</td>
+<td>经过<code>target</code> 的最短路径</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>缺失<code>Order</code>的位置</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>在 <code>pathfinder</code> 回复hash之后，未包含挑战者的<code>Order</code> ，挑战者可调用 <code>missedInHashs</code> 出示路径证据。例如，<code>pathfinder</code> 上传的hash数据如下:</p>
+<table>
+<thead>
+<tr>
+<th>Order</th>
+<th><strong>score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0,1]</td>
+<td>12</td>
+</tr>
+<tr>
+<td>[0,3]</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>挑战者拥有 Order 为 <code>[0,2]</code> 的路径。挑战者只需要出示一条满足条件的路径即可，<code>index</code> 为 <code>1</code> 。出示的证据需要经过仲裁，因为系统无法确定这里的最短路径是否真的是最短的。</p>
+<h2 id="丢失路径的证据"> 丢失路径的证据</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>missedInPaths</span><span>(</span>target<span>,</span>nodes<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>nodes</td>
+<td>Array&lt;String&gt;</td>
+<td>经过<code>target</code> 的最短路径</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+</tbody>
+</table>
+<p><code>pathfinder</code> 上传路径后，挑战者出示 <code>FullOrder</code> 一致的缺失路径作为证据。出示的证据需要经过仲裁，因为系统无法确定这里的最短路径是否真的是最短的。</p>
+<h2 id="非最短路径的证据"> 非最短路径的证据</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>evidenceOfShorter</span><span>(</span>target<span>,</span>index，mid_paths<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>在路径集中的位置</td>
+<td>3</td>
+</tr>
+<tr>
+<td>mid_path</td>
+<td>Array&lt;String&gt;</td>
+<td>不包含端点的中间节点</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+</tbody>
+</table>
+<p><code>pathfinder</code> 上传路径后，挑战者出示更短的路径。端点已知，仅需上传中间节点。<code>evidenceOfShorter</code> 具有完全证明力，无需经过仲裁。</p>
+<h2 id="错误的路径总数"> 错误的路径总数</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>numberTooLow</span><span>(</span>target<span>,</span>index，mid_path<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>index</td>
+<td>Number</td>
+<td>在路径集中的位置</td>
+<td>3</td>
+</tr>
+<tr>
+<td>mid_paths</td>
+<td>Array&lt;Array&lt;String&gt;&gt;</td>
+<td>不包含端点的中间节点</td>
+<td>[['133Hke...LMs9','14ShU...P721N'], ...]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>pathfinder</code> 回复了路径总数的质询，挑战者出示更多路径来证明原来的数字过小。</li>
+<li>挑战者最多可上传 <code>100</code> 条数据，这足以证明该路径无效。</li>
+<li>具有完全证明力，无需经过仲裁。</li>
+</ul>
+<h2 id="证据无效"> 证据无效</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>invalidEvidence</span><span>(</span>target<span>,</span>mid_path，score<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+<tr>
+<td>mid_path</td>
+<td>Array&lt;String&gt;</td>
+<td>不包含端点的中间节点</td>
+<td>['133Hke...LMs9','14ShU...P721N']</td>
+</tr>
+<tr>
+<td>score</td>
+<td>Number</td>
+<td>新的中心度得分</td>
+<td>1231</td>
+</tr>
+</tbody>
+</table>
+<p>对 <code>missedInPaths</code> 或 <code>missedInHashs</code>所出示证据的仲裁，仲裁者需要上传更短的路径。</p>
+<ul>
+<li>如路径经过 <code>target</code> ,则证明 <code>pathfinder</code> 和 <code>challenger</code> 都是错误的，仲裁者将作为新的 <code>pathfinder</code> ，上传的 <code>score</code> 将接受其他挑战者的挑战。</li>
+<li>如果路径不经过 <code>target</code> ,说明 <code>challenger</code>失败，<code>pathfinder</code> 和仲裁者将作为共同受益人，平分池中的资金。</li>
+<li>系统会自动 staking。</li>
+</ul>
+<h2 id="提取收益"> 提取收益</h2>
+<p><strong>Api</strong></p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>tx<span>.</span>ZdRefreshSeeds<span>.</span><span>harvestChallenge</span><span>(</span>target<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>请求参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>目标用户地址</td>
+<td>'133...Ms9'</td>
+</tr>
+</tbody>
+</table>
+<p>获胜方提取收益。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="种子挑战"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">获取数据</title>
+    <id>https://docs.zerodao.net/zh/guide/reputation/</id>
+    <link href="https://docs.zerodao.net/zh/guide/reputation/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="获取数据"> 获取数据</h1>
+<p>我们使用 <code>polkadot.js</code> 提供的接口来演示，你可以在<a href="https://polkadot.js.org/docs/" target="_blank" rel="noopener noreferrer">这里</a>获取更多信息。</p>
+<h2 id="获取声誉"> 获取声誉</h2>
+<p>链上保存了用户最近两期更新的声誉。</p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdReputation<span>.</span><span>reputationScores</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>[</span>
+    <span>{</span>
+        nonce<span>:</span> <span>12</span><span>,</span>
+        score<span>:</span> <span>1233</span>
+    <span>}</span><span>,</span>
+    <span>{</span>
+        nonce<span>:</span> <span>9</span><span>,</span>
+        score<span>:</span> <span>1233</span>
+    <span>}</span>
+<span>]</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><p><code>nonce</code> 是声誉系统更新的次数，你还需要获取系统运行状态：</p>
+<div><pre><code><span>const</span> result <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdReputation<span>.</span><span>systemInfo</span><span>(</span><span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>{</span>
+  nonce<span>:</span> <span>12</span>
+  last<span>:</span> <span>156</span>
+  next<span>:</span> <span>140</span>
+  period<span>:</span> <span>100</span>
+  step<span>:</span> Free
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>系统在刷新期，声誉值的 <code>nonce</code> 如果超过系统 <code>nonce</code> ，这代表该声誉尚未确认。用户的 <code>nonce</code> 过小，可能代表用户近期并不活跃，或其他不可预见的情况。如果你对安全系数的要求并不高，也可以信任该声誉值，例如电影评分应用。如果应用在金融类应用中，应当仔细评估信任该声誉值的风险。</p>
+<h2 id="信任关系"> 信任关系</h2>
+<p>你可以通过以下方式获取用户最新信任关系：</p>
+<div><pre><code><span>const</span> trustedList <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdTrust<span>.</span><span>trustedList</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>这将返回一个 <code>address</code> 的数组，如果你在利用它来搭建社交应用，这已足够了。但如果用来计算声誉值和选取种子，你还需要获取 <code>trustTempList</code>:</p>
+<div><pre><code><span>const</span> trustTempList <span>=</span> <span>await</span> api<span>.</span>query<span>.</span>zdTrust<span>.</span><span>trustTempList</span><span>(</span>address<span>)</span>
+</code></pre>
+<div><span>1</span><br></div></div><p>Return:</p>
+<div><pre><code><span>{</span>
+    trust<span>:</span> <span>[</span><span>]</span><span>,</span>
+    untrust<span>:</span> <span>[</span><span>]</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>这用来缓存用户在系统刷新前的信任关系，如果用户在刷新期取消了信任，则会缓存到 <code>trust</code>中。因此，你需要对 <code>trustedList</code> 排除 <code>untrust</code> ，并且合并 <code>trust</code> 。最终得到的数据才可用来计算声誉和选取种子。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="获取数据"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">刷新声誉</title>
+    <id>https://docs.zerodao.net/zh/guide/reputation/reputation/</id>
+    <link href="https://docs.zerodao.net/zh/guide/reputation/reputation/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="刷新声誉"> 刷新声誉</h1>
+<p>使用通用计算框架可以很方便地计算声誉值，例如</p>
+<ul>
+<li>
+<p><a href="https://neo4j.com/" target="_blank" rel="noopener noreferrer">Neo4j</a> - 基于 Java 的图数据库和计算框架</p>
+</li>
+<li>
+<p><a href="https://github.com/networkx/networkx" target="_blank" rel="noopener noreferrer">networkx</a> - 著名的 Python 库</p>
+</li>
+<li>
+<p><a href="https://js.cytoscape.org/" target="_blank" rel="noopener noreferrer">Cytoscape.js</a> - 基于 JavaScript</p>
+</li>
+<li>
+<p><a href="https://github.com/graphology/graphology" target="_blank" rel="noopener noreferrer">graphology</a> - 基于 JavaScript</p>
+</li>
+<li>
+<p><a href="http://spark.apache.org/" target="_blank" rel="noopener noreferrer">Spark</a> - 计算引擎，当 ZeroDAO 变得庞大时你将需要它</p>
+</li>
+</ul>
+<h2 id="更新路径权重"> 更新路径权重</h2>
+<p>使用系统上一期的声誉来计算路径权重，计算公式为：</p>
+<p class='katex-block'><span><span><span><i>Not supported content</i></span><span aria-hidden="true"><span><span style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span style="margin-right:0.13889em;">W</span><span>e</span><span>i</span><span style="margin-right:0.03588em;">g</span><span>t</span><span><span>h</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span><span>ab</span></span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2777777777777778em;"></span><span>=</span><span style="margin-right:0.2777777777777778em;"></span></span><span><span style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span style="margin-right:0.10764em;">f</span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>,</span><span style="margin-right:0.16666666666666666em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span style="margin-right:0.16666666666666666em;"></span><span><span style="top:0em;"><span>{</span></span><span><span><span><span><span><span style="height:1.69em;"><span style="top:-3.69em;"><span style="height:3.008em;"></span><span><span>ln</span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2222222222222222em;"></span><span>−</span><span style="margin-right:0.2222222222222222em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span>,</span></span></span><span style="top:-2.25em;"><span style="height:3.008em;"></span><span><span>1</span><span>,</span></span></span></span><span>​</span></span><span><span style="height:1.19em;"><span></span></span></span></span></span><span style="width:1em;"></span><span><span><span><span style="height:1.69em;"><span style="top:-3.69em;"><span style="height:3.008em;"></span><span><span>i</span><span style="margin-right:0.10764em;">f</span><span> </span><span>(</span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span style="margin-right:0.05017em;">B</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2222222222222222em;"></span><span>−</span><span style="margin-right:0.2222222222222222em;"></span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span>)</span><span style="margin-right:0.2777777777777778em;"></span><span>&gt;</span><span style="margin-right:0.2777777777777778em;"></span><span>e</span></span></span><span style="top:-2.25em;"><span style="height:3.008em;"></span><span><span>e</span><span style="margin-right:0.01968em;">l</span><span>se</span><span> </span></span></span></span><span>​</span></span><span><span style="height:1.19em;"><span></span></span></span></span></span></span></span><span></span></span></span></span></span></span></p>
+<p>在工程实现上，我们向下取整，并将最大权重设为 <code>8</code> , 方便我们更高效地取近似值，避免在链上计算自然对数。</p>
+<h2 id="获取最短路径"> 获取最短路径</h2>
+<p>将路径权重导入你的数据库后，就可以找出种子节点到其他所有节点的有向图加权最短路径了。在有些计算框架中可能需要将最短路径的结果保存为文件，再进行下一步计算。这样比较高效，同时为挑战游戏作准备。</p>
+<h2 id="计算声誉"> 计算声誉</h2>
+<p>从种子到目标节点的最短路径，迭代计算声誉，种子初始声誉值为常数 <code>INIT_SEED_RANK</code> 。</p>
+<p>计算公式为：</p>
+<p class='katex-block'><span><span><span><i>Not supported content</i></span><span aria-hidden="true"><span><span style="height:0.83333em;vertical-align:-0.15em;"></span><span style="margin-right:0.05764em;">S</span><span style="margin-right:0.02778em;">cor</span><span><span>e</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>b</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.2777777777777778em;"></span><span>=</span><span style="margin-right:0.2777777777777778em;"></span></span><span><span style="height:2.47044em;vertical-align:-0.8804400000000001em;"></span><span><span></span><span><span><span><span style="height:1.5899999999999999em;"><span style="top:-2.314em;"><span style="height:3em;"></span><span><span style="margin-right:0.13889em;">T</span><span style="margin-right:0.02778em;">r</span><span>u</span><span>s</span><span style="margin-right:0.07153em;">tC</span><span>o</span><span>u</span><span>n</span><span><span>t</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span><span style="margin-right:0.13889em;">W</span><span>e</span><span>i</span><span style="margin-right:0.03588em;">g</span><span>t</span><span><span>h</span><span><span><span><span style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span><span>ab</span></span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span style="height:3em;"></span><span style="border-bottom-width:0.04em;"></span></span><span style="top:-3.74em;"><span style="height:3em;"></span><span><span><span style="margin-right:0.00773em;">R</span><span><span><span><span style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span style="height:2.7em;"></span><span><span>A</span></span></span></span><span>​</span></span><span><span style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span>​</span></span><span><span style="height:0.8804400000000001em;"><span></span></span></span></span></span><span></span></span></span></span></span></span></p>
+<ul>
+<li><code>TrustCount</code> - 源节点信任的用户数，在工程实现上最小值为常数 <code>MIN_TRUST_COUNT</code></li>
+<li><code>Weigth</code> - 路径权重</li>
+</ul>
+<p>最后我们将所有种子的计算结果求和，得到用户的最终声誉。</p>
+<h2 id="刷新声誉-2"> 刷新声誉</h2>
+<p>计算出声誉后，就可以通过 <code>tx.zdRefreshReputation.refresh()</code> 接口来刷新用户声誉了，你可以批量刷新多个用户的声誉。系统将会自动扣除抵押金额，需要保证你有足够的余额。该接口的参数：</p>
+<div><pre><code><span>[</span><span>[</span>address<span>,</span>reputation<span>]</span><span>]</span>
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="领取收益"> 领取收益</h2>
+<p>你刷新的最后一个声誉被确认后，才可以领取收益了。调用接口 <code>tx.zdRefreshReputation.harvestRefAll()</code> ，它不需要传递任何参数，系统会把你所有的抵押金额和更新收益发送给你。</p>
+<p>你不需要像领取种子收益那样每个种子领取一遍，而是一次性全部领取，这样可以大幅减少链上资源消耗。</p>
+<p>声誉更新的收益为该用户的社交货币总额乘以手续费率，所以优先选择那些社交货币余额较高的用户，对你来说是个好策略。对于声誉系统来说，这样做可以反映用户的活跃度。</p>
+<p>同时也应该注意到，有些用户没有足够的社交货币，但仍然需要更新声誉值。<code>pathfinder</code> 可以开通付费更新的通道。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="刷新声誉"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">生态构建</title>
+    <id>https://docs.zerodao.net/zh/learn/getting-started/architecture/</id>
+    <link href="https://docs.zerodao.net/zh/learn/getting-started/architecture/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="生态构建"> 生态构建</h1>
+<p><img src="./../../image/st.png" alt="" /></p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="生态构建"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">重要资源</title>
+    <id>https://docs.zerodao.net/zh/learn/getting-started/resources/</id>
+    <link href="https://docs.zerodao.net/zh/learn/getting-started/resources/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="重要资源"> 重要资源</h1>
+<ul>
+<li><a href="https://substrate.dev/" target="_blank" rel="noopener noreferrer">Substrate</a> - 作为 ZeroDAO-node 构建的底层框架。</li>
+<li><a href="https://polkadot.js.org/apps" target="_blank" rel="noopener noreferrer">Polkadot-JS Apps</a> - 与 Substrate 节点进行交互的 UI。</li>
+<li><a href="https://polkadot.js.org/docs/" target="_blank" rel="noopener noreferrer">Polkadot-JS Docs</a> - 与 Substrate 节点进行交互的库。</li>
+<li><a href="https://github.com/ZeroDAO" target="_blank" rel="noopener noreferrer">ZeroDAO Github</a> - ZeroDAO 的github。</li>
+</ul>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="重要资源"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">路线图</title>
+    <id>https://docs.zerodao.net/zh/learn/getting-started/roadmap/</id>
+    <link href="https://docs.zerodao.net/zh/learn/getting-started/roadmap/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="路线图"> 路线图</h1>
+<div><p>2021 Q2 MVP</p>
+<p>验证项目可行性和算法效果。</p>
+</div>
+<div><p>2021 Q4 空中花园 测试网</p>
+<p>Alpha测试网络，包含核心TIR算法和声誉系统，并最终迭代为完整版</p>
+</div>
+<div><p>2021 Q4 大航海 测试网</p>
+<p>支持 DAO 网络核心能力，并作为主要测试网</p>
+</div>
+<div><p>2021 Q4 移动宫殿 生态升级</p>
+<p>模拟链上的场景，对多领域应用进行快速可行性验证，并进行链上测试和开发</p>
+</div>
+<div><p>2022 Q1 主网上线</p>
+<p>完整支持智能合约、声誉系统和DAO</p>
+</div>
+<div><p>2022 Q1 星际漫游</p>
+<p>升级主网跨链能力</p>
+</div>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="路线图"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">简介</title>
+    <id>https://docs.zerodao.net/zh/learn/</id>
+    <link href="https://docs.zerodao.net/zh/learn/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="简介"> 简介</h1>
+<p>ZeroDAO Network 是一个属于全体元宇宙 或 Web3 建设者的 DAO 网络，ZeroDAO Network 所有网络机制的目标在于，在维持资源公平分配的同时，保证可持续、高强度的创新力。</p>
+<h2 id="理念"> 理念</h2>
+<h3 id="理性并优雅"> 理性并优雅</h3>
+<p>ZeroDAO 的名称来源于一个算式： <code>0º = 1</code> ，我们希望用理性和优雅的方式从零到一不断创造新的可能。</p>
+<h3 id="现实接口"> 现实接口</h3>
+<p>ZeroDAO 是连接现实世界和数字世界的接口，我们将现实世界巧妙地映射到数字世界(Web3 或 元宇宙)，不断地建设更好的协作模式和分配机制，进而深远地推动现实世界的进步。</p>
+<h2 id="加入"> 加入</h2>
+<p>我们将大部分token锁在DAO中，ZeroDAO Network 属于那些富有创造力和激情的社区成员们。</p>
+<h3 id="研究"> 研究</h3>
+<p>ZeroDAO Network 的发展需要孜孜不倦的研究，从底层的 TIR 算法，到 DAO 的协作、激励机制，再到Dapp的设计，都需要经济学、社会学、控制论、密码学等等学科理论的推动。</p>
+<h3 id="应用层协议"> 应用层协议</h3>
+<p>建立或完善应用层协议，或参与讨论，以让应用层协议支持应用生态更好地协作。</p>
+<h3 id="应用"> 应用</h3>
+<p>不必担心你的想法过于疯狂，让疯狂的想法最终变成人们习以为常的产品，这正是我们在做的事。ZeroDAO 以社交网络、声誉系统作为基础，将全面推动web3和metaverse的应用。你可以通过DAO协作，提出一个想法以获得更广泛的讨论和支持，也可以提出一个深思熟虑的提案以请求协作，或者你和你的团队直接创造出应用。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="简介"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">TIR algorithm</title>
+    <id>https://docs.zerodao.net/learn/reputation/tir/</id>
+    <link href="https://docs.zerodao.net/learn/reputation/tir/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="tir-algorithm"> TIR algorithm</h1>
+<p>Formerly known as Goolge's text retrieval algorithm for search engines, the TIR algorithm was used to replace the vulnerable PageRank algorithm and is computationally simple and requires no iteration compared to its TrustRank counterpart.</p>
+<p>The TIR algorithm stems from the assumption that <strong>highly influential users are less likely to trust fake users</strong>. We first select the highest influential users from the entire network as seeds, and the smaller the shortest path of a given user from all seeds the higher the reputation. The following is a concrete implementation.</p>
+<h2 id="calculation-reputation"> Calculation reputation</h2>
+<p><img src="./../../image/how-c-r.png" alt="" /></p>
+<ol>
+<li><strong>Selecting seeds</strong> - The longest shortest path through the most number of nodes is selected as the seed user, the larger the network, the higher the account cost about, the more difficult it is to cheat.</li>
+<li><strong>Assignment</strong> - Set the seed score to the constant R_max.</li>
+<li><strong>Path length</strong> - The path length is a confidence level, which stems from our assumptions. A low reputation user trusting a high reputation user is considered credible, a high reputation user trusting a low reputation user, and the path length is the natural logarithm of the reputation value difference. In this case, the larger the reputation value difference, the longer the path.</li>
+<li><strong>Shortest path</strong> - Calculate the weighted shortest path between the target node and the seed user. Using the <code>D</code> user as an example, the shortest path in the graph is <code>Seed -&gt; A -&gt; D</code>.</li>
+<li><strong>Calculating score transfer</strong> - It is equally divided according to the number of source node trusts and is inversely proportional to the path length.</li>
+<li><strong>Total score</strong> - The score passed to each seed is calculated and the total sum is the reputation of that user.</li>
+</ol>
+<h2 id="sybil-resistance"> Sybil resistance</h2>
+<p>So far there is still a possibility of cheating, especially if the network is small and only another independent network larger than the existing one needs to be constructed. It will cause the system to incorrectly select cheating nodes as seed nodes.</p>
+<p>Of course, when the network size is larger, we increase the cheating cost significantly by raising the account retention fee and increasing Gas to protect the network security. However, this is still not perfect and raises the cost of use for normal users at the same time.</p>
+<p><img src="./../../image/spam.png" alt="" /></p>
+<p>To ensure that the network is mathematically secure, regardless of the size of the network and the amount of money the cheater has, the network can be guaranteed to be safe. We use the Hall of Fame model.</p>
+<h3 id="hall-of-fame"> Hall of Fame</h3>
+<p><img src="./../../image/mrt.png" alt="" /></p>
+<h4 id="the-community-selects-a-small-number-of-hall-of-fame-users"> The community selects a small number of Hall of Fame users</h4>
+<p>SPAM nodes have no reputation value, or very little reputation value they cannot influence the Hall of Fame selection</p>
+<h4 id="join-seed-node-distance"> Join seed node distance</h4>
+<p>The shortest path between the seed and the Hall of Fame member is used as one of the parameters in the seed selection. Fake nodes cannot be trusted by the Hall of Fame members and therefore cannot become seeded users.</p>
+<p>:::: tips</p>
+<p>We will be adding a Hall of Fame election feature in the next release, along with <code>MACI</code> and a combination of reputation values.</p>
+<p>::::</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">挑战游戏</title>
+    <id>https://docs.zerodao.net/zh/learn/reputation/challenge-games/</id>
+    <link href="https://docs.zerodao.net/zh/learn/reputation/challenge-games/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="挑战游戏"> 挑战游戏</h1>
+<p>在链上计算社交图谱的最短路径需要耗费大量资源，但最短路径验证却很方便。利用这一点特性我们采用挑战游戏来验证数据准确性。</p>
+<h2 id="角色"> 角色</h2>
+<p>挑战游戏有三种角色：开拓者和挑战者。</p>
+<h3 id="开拓者-pathfinder"> 开拓者 ( Pathfinder )</h3>
+<p>开拓者负责每隔一段时间选取种子、计算用户声誉，抵押一定金额后，将结果上传到链上。链上的数据要等待一段时间，挑战者可在这段时间内对数据发起挑战，并根据流程证明自己的结果更可信。挑战成功后，挑战者将获得开拓者的抵押资金。如果超过挑战时间未有挑战，开拓者可收回抵押资金并获得奖励。在声誉刷新时，奖励为目标用户一定比例的社交货币。种子刷新的奖励则是整个奖金池中的资金。</p>
+<h3 id="挑战者-challenger"> 挑战者 ( Challenger )</h3>
+<p>挑战者负责维护链上声誉数据和种子数据的准确性，当发现错误后，可以抵押一定金额对数据发起挑战。挑战成功后将获得开拓者的抵押资金。挑战者和开拓者并不是固定不变的，挑战者挑战成功会转变为开拓者接受其他挑战者的挑战。如果被挑战成功，将会失去所有收益，包括自己的抵押金额。因此，奖励的总额是不断累积的，这保证了系统不断逼近数据的真实性。</p>
+<h3 id="清道夫-sweeper"> 清道夫 (sweeper)</h3>
+<p>为了减少节点运行的负担，所有刷新数据和挑战游戏的数据都需要获利者在领取收益的同时进行清除。开拓者和挑战者都必须保障链上数据的清洁，如果在一定时间内未领取收益，则清道夫可代理领取，代价是清道夫将从中获得一定比例的收益。</p>
+<h2 id="声誉挑战"> 声誉挑战</h2>
+<h3 id="发起挑战"> 发起挑战</h3>
+<p>挑战者可以对开拓者刷新的声誉进行挑战，并且上传所有有效路径和得分（得分需要大于0）。在挑战阶段，链上并不验证分值的计算结果是否正确，仅仅验证路径是否正确，这样可以大幅减少链上的计算量。挑战者挑战成功后，进入仲裁阶段。</p>
+<p>包括以下的种子挑战中，在需要所有上传大量数据的情况下，我们都支持断点续传，即可以将结果分成多笔交易上传。这在数据结果超过区块权重，或网络拥堵的情况下很有用。</p>
+<h3 id="仲裁"> 仲裁</h3>
+<p>其他挑战者可以在规定的时间内上传更短的路径或不一样的数值，对数据进行仲裁。此时将在链上对计算结果进行验证，确保仲裁阶段的所有数据都是正确的。发起仲裁的挑战者依然需要等待其他挑战者的仲裁，因此挑战者需要指出所有错误才能挑战成功。</p>
+<h2 id="种子挑战"> 种子挑战</h2>
+<p>首先我们按照种子选取规则，对种子路径进行计算。在 ZeroDAO 当前版本中，我们使用 <code>介数中心度</code> 的方式来选取种子，这么做的好处是 <code>介数中心度</code> 是一个常用算法，方便我们实现。在后期版本中，我们会采用经过裁剪的路径树，以减少计算量和链上验证量。但无论如何，在网络变得很大时，经过种子用户的最短路径的数量将会非常庞大。将其一一上传到链上进行对比和验证是没有必要的。我们需要通过一定的索引方法，让挑战者找到和开拓者差异路径。如此一来，而我们可以在链上准确地验证差异路径，从而确定开拓者和挑战者谁的数据更可信。</p>
+<h3 id="质询和回答"> 质询和回答</h3>
+<p>我们寻找差异数据的方式是形成一颗拥有数据和的树，深度越深，则包含的数据量越小，最终得到很少的结果集上传到链上。于是我们仅需要少量的交互即可找到差异之处。要实现这一点，首先需要对计算结果进行处理。结果包括两方面：路径和得分。我们对路径的起点和终点进行哈希，</p>
+<p><img src="./../../image/deep.png" alt="" /></p>
+<p>如图所示，第一层为最后一位数，我们把该位置值相同的得分相加，最多有16个结果。第二层为最后一位和倒数第二位相同的得分相加，最多有256个结果。挑战者需要从16个数值中，找到得分总和不一样的位置，采用质询和回答的交互来达到最终的路径结果。分隔后的路径结果是较小的，我们完全可以在链上验证了。</p>
+<p>当前版本的 ZeroDAO 网络中，我们每次选取两个位置，最大深度为 4。也就是说，我们可以对至少 256 ^ 4 * n 的路径进行快速验证。</p>
+<h3 id="证据"> 证据</h3>
+<p>在发现错误后，挑战者可以上传证据。例如，上传更短的路径，来证明开拓者的计算是错误的。而有时证据的证明力会不足，例如挑战者上传了一条经过种子 <code>A</code> 的最短路径，端点为 <code>C</code> 和 <code>D</code>，而这条路径在开拓者的数据中并不存在。但系统并不能确定 <code>C</code> 和 <code>D</code> 之间是否存在更短的路径不经过 <code>A</code> 。这样的情况下，证据需要经过仲裁确定。</p>
+<h3 id="仲裁-2"> 仲裁</h3>
+<p>仲裁是对证据的有效性的判定。如上面所述，其他用户出示了 <code>C</code> 到 <code>D</code> 的更短的路径，但不经过 <code>A</code> ，如此一来挑战者的证明则是无效的。仲裁的用户将作为开拓者的共同受益人，平分资金池中的资金。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">声誉系统</title>
+    <id>https://docs.zerodao.net/zh/learn/reputation/</id>
+    <link href="https://docs.zerodao.net/zh/learn/reputation/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="声誉系统"> 声誉系统</h1>
+<p>区块链多年快速的发展向人们展示了其非同凡响的价值，但缺乏高可用性的声誉系统阻碍了区块链的进一步发展。一个高可用的声誉系统将至少带来以下两点变革：</p>
+<p><strong>机器人 ≠ 人</strong></p>
+<p>在Play to Earn奖励、UBI、甚至以太坊的黑暗森林中，无处不在的机器人吞噬着本应该属于用户的资产。缺乏可信身份，我们在元宇宙的经济行为将要付出极高的摩擦和损耗。对于Web3.0来说，如果系统不能识别屏幕背后到底是真实用户还是伪造的假身份，怎么谈得上让权利回归用户自己？</p>
+<p><strong>资本 ≠ 权力</strong></p>
+<p>社区化的区块链很大程度上是一种公共资源，任何人都可以参与治理，任何人都可以从共建的社区发展中获益。然而代币投票让现实世界的“资本即权力”延续到元宇宙，既然如此，我们构建元宇宙还有什么意义？&quot;资本即权力&quot;也让区块链失去了公共资源的特性。我们需要可靠的、拥有长久声誉的身份系统和与之匹配的DAO机制，从而带来新的治理方式。</p>
+<h2 id="zerodao-声誉系统有何不同"> ZeroDAO 声誉系统有何不同？</h2>
+<p>区块链诞生后不久人们对“声誉系统”能带来根本性的变化达成共识，尝试了身份证明系统（Proof of personhood systems）、参与证明（Proof of participation）以及身份预言机等等，他们要么成本高昂，要么不够去中心化，要么无法抵御女巫攻击。</p>
+<p>ZeroDAO的声誉系统采用去中心化的方式计算用户的声誉，他代表着用户的可信度、影响力、信用，是真正意义上的“去中心化身份”。广泛的流社交网络使得声誉具有高覆盖度，之后引入 DAO 的垂直身份，形成满足不同应用的立体身份。ZeroDAO 将支持智能合约，你可以在ZeroDAO 链上开发、使用Dapp，以低成本地获得原生的声誉系统加持。ZeroDAO 作为声誉系统的基础设施，你也可以将ZeroDAO 的声誉系统跨链至其他公链，例如以太坊或substrate生态。</p>
+<p>以下是 ZeroDAO 声誉系统和其他类别声誉系统的对比：</p>
+<p><img src="./../../image/reputation-sys.png" alt="" /></p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">TIR 算法</title>
+    <id>https://docs.zerodao.net/zh/learn/reputation/tir/</id>
+    <link href="https://docs.zerodao.net/zh/learn/reputation/tir/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="tir-算法"> TIR 算法</h1>
+<p>TIR算法前身为Goolge用于搜索引擎的文本检索算法，其用来取代易被攻击的PageRank算法，与同类型的 TrustRank 算法相比，他计算简单，无需迭代。</p>
+<p>TIR算法源于一个假设：<strong>高影响力用户不太可能信任虚假用户</strong>。我们首先从整个网络中选取最高影响力的用户作为种子，某用户距所有种子的最短路径越小则声誉越高。以下是具体的实现：</p>
+<h2 id="声誉计算"> 声誉计算</h2>
+<p><img src="./../../image/how-c-r.png" alt="" /></p>
+<ol>
+<li><strong>选取种子</strong> - 选取最长的最短路径经过次数最多的一批节点为种子用户，网络越大，账号成本约高，则作弊难度越高。</li>
+<li><strong>赋值</strong> - 将种子分值设为常数 R_max。</li>
+<li><strong>路径长度</strong> - 路径长度是一种置信度，这源于我们的假设。低声誉值用户信任高声誉值用户，则视为可信的，高声誉值用户信任低声誉值用户，路径长度则为声誉值差的自然对数。此时，声誉值差别越大，则路径越长。</li>
+<li><strong>最短路径</strong> - 计算目标节点与种子用户加权最短路径。以<code>D</code>用户为例，图中最短路径为<code>Seed -&gt; A -&gt; D</code>。</li>
+<li><strong>计算分值传递</strong> - 根据源节点信任数量均分，并与路径长度成反比。</li>
+<li><strong>总分值</strong> - 计算每个种子传递过来的分值，总和即为该用户声誉。</li>
+</ol>
+<h2 id="抗女巫攻击"> 抗女巫攻击</h2>
+<p>目前为止仍然具有作弊的可能性，特别是在网络较小的情况下，只需要构造一个大于现有网络的另一个独立网络，或精心构造的关系网络。将导致系统错误选取作弊节点作为种子节点。</p>
+<p>当然，在网络规模较大时，我们通过提高账号保留费用，提高Gas来大幅增加作弊成本，保护网络安全。但这样做仍然是不够完美的，同时提高了正常用户的使用成本。攻击模式如下图所示：</p>
+<p><img src="./../../image/spam.png" alt="" /></p>
+<p>为了保证数学上的安全性，无论网络大小，无论作弊者拥有多少资金，都可以保证网络是安全的。我们采用名人堂模式：</p>
+<h3 id="名人堂"> 名人堂</h3>
+<p><img src="./../../image/mrt.png" alt="" /></p>
+<h4 id="社区选取少量的名人堂用户"> 社区选取少量的名人堂用户</h4>
+<p>社区选出少量名人堂成员，作弊节点无声誉值，或声誉值很小他们无法左右名人堂选取。</p>
+<h4 id="加入种子节点距离"> 加入种子节点距离</h4>
+<p>在种子选取时，将种子与名人堂成员的最短路径作为参数之一，虚假节点无法得到名人堂成员信任，因此无法成为种子用户。</p>
+<p>:::: tips 进度</p>
+<p>我们将在下个版本中加入名人堂选举功能，同时拥有 MACI 并结合声誉值。</p>
+<p>::::</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">应用指南</title>
+    <id>https://docs.zerodao.net/zh/learn/social-finance/applications/</id>
+    <link href="https://docs.zerodao.net/zh/learn/social-finance/applications/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="应用指南"> 应用指南</h1>
+<h2 id="创作者经济"> 创作者经济</h2>
+<p>并非所有创作者经济产品都应当使用 ICSC 或传统货币的模式，应当仔细考量具体的模式。但有个原则是肯定的，在内容激励可能带来负面效应时，应该果断采用ICSC 。下面列举了一些常见的贡献模式，并给出相应分析和建议：</p>
+<ul>
+<li><strong>阅读时长</strong> - 用户阅读一定时间获得 Token  奖励，这种模式尽量使用 ICSC 。</li>
+<li><strong>小说</strong> - 付费订阅和版权类的小说平台，不应当使用 ICSC。</li>
+<li><strong>信息流</strong> - 传统社交网络信息流模式，例如推特、Facebook 类型的应用，必须采用 ICSC 。</li>
+<li><strong>播客</strong> - 应当以 ICSC 为主，辅以广告分成等模式。</li>
+</ul>
+<h2 id="广告平台"> 广告平台</h2>
+<p>传统区块链广告将注意力结算为Token，将区块链广告演变为激励广告，场景极为狭窄。这将演变为用户为了获得 Token 而观看广告，而广告主需要的是对产品感兴趣的潜在客户，这种矛盾决定了传统去中心化广告平台无法大规模应用。但如果将奖励改变为 ICSC 模式就变成可行了。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="应用指南"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">社交金融</title>
+    <id>https://docs.zerodao.net/zh/learn/social-finance/</id>
+    <link href="https://docs.zerodao.net/zh/learn/social-finance/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="社交金融"> 社交金融</h1>
+<p>运行在社交货币之上的金融体系。</p>
+<p>ZeroDAO 希望赋予社交货币唯一的和最优的定义，我们相信社交货币不仅仅是一个泛泛而谈的概念，而是一个切实可行的 web3.0 社交网络的底层经济。它并没有发明新东西，而是人类社交价值和社交互动的数字化。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="社交金融"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">社交货币</title>
+    <id>https://docs.zerodao.net/zh/learn/social-finance/social-currency/</id>
+    <link href="https://docs.zerodao.net/zh/learn/social-finance/social-currency/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="社交货币"> 社交货币</h1>
+<h2 id="激励相容"> 激励相容</h2>
+<p>通常我们认为奖励好的事情会激发更多好的事情，事实上并非如此，相像以下如果发一条推特一块钱，那么推特会变成什么样子？然而这正是我们在Web3时代做的事情，我们发行货币奖励那些对社交网络贡献内容和互动的用户。我们不应该忽视真相，这并不会让Web3社交网络比传统社交网络更有价值。</p>
+<p>区块链早期的社交网络探索中，以用户即股东、贡献即收益、数据即价值为理想，但贡献货币化的激励模式是阻碍通往理想的一座大山。当我们为获取货币在社交网络中奔波时，社交网络给了我们收益，却让我们失去快乐。激励好的行为有可能让好的行为消失，这就是经济学上的激励不相容。ZeroDAO 的流社交网络不仅给你带来你应有的资产，还带给你快乐。这种快乐是成长的快乐、分享的快乐、帮助他人的快乐，其实这些久违的快乐其实早就写在互联网“分享、自由”的基因中。我们旨在打造一个激励相容的社交货币。</p>
+<h2 id="激励相容的社交货币-icsc"> 激励相容的社交货币 ICSC</h2>
+<p>ZeroDAO 的社交货币，是一种激励相容的社交货币(<code>ICSC</code>)，社交网络应用依然量化用户贡献并结算为 Token 发送给用户，例如 <code>FacebookToken</code>。但这部分社交货币用户并不能直接使用，而是暂时处于冻结状态。</p>
+<p><img src="./../../image/fp.png" alt="" /></p>
+<ol>
+<li><strong>结算</strong> - 应用量化用户贡献并发送到 <code>A</code> 的社交货币账户。</li>
+<li><strong>分享</strong> - 系统定期将 A 的待分配收益分配给其信任的 <code>B</code> <code>C</code> <code>D</code>。</li>
+<li><strong>网络</strong> - <code>B</code> <code>C</code> <code>D</code> 同样将新的待分配收益分享，形成价值分析网络</li>
+</ol>
+<p>每隔一段时间由 <code>pathfinder</code> 在进行声誉刷新时一起分配，分配方式如下：</p>
+<p><img src="./../../image/sc.png" alt="" /></p>
+<ol>
+<li><strong>用户保留收益</strong> - 解冻一定比例的金额到用户余额，比例可由社区调整，以适应不同运营状态。</li>
+<li><strong>分配给信任的用户和机构</strong> - 平均分配给该用户信任的用户，进入其待分配金额池中。</li>
+<li><strong>手续费</strong> - <code>pathfinder</code> 收取的手续费。</li>
+<li><strong>销毁</strong> - 可以理解为分享给所有用户。</li>
+<li><strong>总奖金池</strong> - 一小部分发送到总奖金池，用于种子刷新和验证者困境等等。</li>
+</ol>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="社交货币"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">零损失支付</title>
+    <id>https://docs.zerodao.net/zh/learn/social-finance/zero-cost-payment/</id>
+    <link href="https://docs.zerodao.net/zh/learn/social-finance/zero-cost-payment/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="零损失支付"> 零损失支付</h1>
+<p>一种用户没有任何损失，但是商家却收到钱的支付模式。这是通过 ZeroDAO 的社交货币实现的。</p>
+<p><img src="./../../image/0cost.png" alt="" /></p>
+<h2 id="机构账户"> 机构账户</h2>
+<p>一种特殊的账号，它与普通账号一样可被信任，不同的是其只参与分配，不参与声誉系统计算。分配到的金额直接进入自由账户，不再次分配。</p>
+<h2 id="零损失"> 零损失</h2>
+<p>社交货币本就是用来分享给其他用户的，现在只是多分了一份而已，用户并没有任何损失，但商家却收到了钱。用户更愿意接受这样的支付模式，这是一种全新的支付模式，可适用于多种场景。例如公益慈善将可以通过这种方式更好地筹集资金，开源社区获得更多的资助。另外，通过这种模式我们解决了去中心化存储的支付困境。</p>
+<div><p>Tips</p>
+<p>零成本支付大规模商用，仍需解决合谋恶意套现问题。</p>
+</div>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="零损失支付"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">ZeroDAO 文档</title>
+    <id>https://docs.zerodao.net/zh/</id>
+    <link href="https://docs.zerodao.net/zh/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">种子选取</title>
+    <id>https://docs.zerodao.net/zh/guide/reputation/seeds/</id>
+    <link href="https://docs.zerodao.net/zh/guide/reputation/seeds/"/>
+    <updated>2021-11-16T15:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="种子选取"> 种子选取</h1>
+<p>在最新版本中，采用了介数中心度算法来选取种子。因为介数中心度应用较为广泛，你可以高效地利用你熟悉的计算框架。在后期将对算法进行调整，采用修剪过的关系图谱，以减少链上数据量。</p>
+<h2 id="介数中心度"> 介数中心度</h2>
+<p>介数中心度反映了用户在网络中的桥梁作用，通过某节点的最短路径越多，则中心度越高。本文更侧重于描述与常见计算框架的差异之处。</p>
+<p><img src="./../../image/seed.png" alt="" /></p>
+<p>计算上图中 <code>C</code> 点的中心度，我们获取经过 <code>C</code> 的所有最短路径、端点间最短路径条数，并计算最终得分。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">最短路径</th>
+<th style="text-align:left">总数</th>
+<th>得分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">A - B - C - E</td>
+<td style="text-align:left">2</td>
+<td>50</td>
+</tr>
+<tr>
+<td style="text-align:left">A - B - D - E</td>
+<td style="text-align:left">2</td>
+<td>50</td>
+</tr>
+<tr>
+<td style="text-align:left">B - C - E</td>
+<td style="text-align:left">1</td>
+<td>100</td>
+</tr>
+<tr>
+<td style="text-align:left">D - C - E</td>
+<td style="text-align:left">1</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>路径 <code>A - B - C - E</code>，由于端点 <code>A</code> 和 <code>D</code> 之间的最短路径有 <code>2</code> 条，因此各自的得分为 <code>100 / 2 = 50</code> 。此处的 <code>100</code> 为精度，意味着保留小数点后两位，因此当其大于等于 <code>100</code> 时，该数据是无效的。</p>
+<p>因此，你不应当直接使用任何通用计算框架的介数中心度数据，他们存在精度问题，并且很多框架采用的是近似算法。你可以使用他们快速计算临时的中心度，找出中心度最高的一批节点作为种子，再计算每个种子节点距其他所有节点的所有最短路径，最后再计算精确的得分。</p>
+<div><p>Tips</p>
+<p>通过常数 <code>maxSeedCount</code> 获得最多种子用户数量，上传分值过低的种子节点，将无法获取奖励。如果排名最后的分值相同，则按照领取收益的时间来确定。</p>
+</div>
+<div><p>Tips</p>
+<p>在添加种子候选人前，你应当准备好应对挑战的数据，以免来不及准备数据错过窗口期，导致不必要的损失。不过如果你的数据准确，这种情况应该非常罕见，因为有其他用户纠正错误的挑战。</p>
+</div>
+<h2 id="增加种子候选人"> 增加种子候选人</h2>
+<p>确定种子后，你可以通过调用 <code>zdRefreshSeeds.add(target, score)</code> 来添加一个种子候选人。需要确保你的账户余额足够抵押，系统会自动扣除。</p>
+<h2 id="领取收益"> 领取收益</h2>
+<p>种子的收益领取，需要在所有种子被确认后，这要求所有针对种子的挑战全部完成并领取。调用 <code>zdRefreshSeeds.harvestSeed(seed)</code> 即可领取，系统将会把你的抵押金额和收益发送给你。</p>
+]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="种子选取"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+  <entry>
+    <title type="html">快速开始</title>
+    <id>https://docs.zerodao.net/zh/guide/</id>
+    <link href="https://docs.zerodao.net/zh/guide/"/>
+    <updated>2021-11-23T06:29:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="快速开始"> 快速开始</h1>
+<h2 id="环境配置"> 环境配置</h2>
+<h3 id="安装-rust"> 安装 Rust</h3>
+<div><pre><code><span>curl</span> https://sh.rustup.rs -sSf <span>|</span> <span>sh</span>
+rustup update stable
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><h3 id="安装依赖"> 安装依赖</h3>
+<h4 id="mac"> Mac</h4>
+<div><pre><code>brew <span>install</span> cmake pkg-config openssl <span>git</span> llvm
+</code></pre>
+<div><span>1</span><br></div></div><h4 id="linux"> Linux</h4>
+<div><pre><code><span>sudo</span> <span>apt</span> <span>install</span> cmake pkg-config libssl-dev <span>git</span> clang libclang-dev
+</code></pre>
+<div><span>1</span><br></div></div><div><p>更多</p>
+<p>ZeroDAO 基于 Substrate 开发，了解更多请至 <a href="https://docs.substrate.io/v3/getting-started/overview/" target="_blank" rel="noopener noreferrer">Substrate</a> 。</p>
+</div>
+<h2 id="安装"> 安装</h2>
+<div><pre><code><span>git</span> clone https://github.com/ZeroDAO/ZeroDAO-node
+<span>cd</span> ZeroDAO-node
+<span>make</span> init
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="编译"> 编译</h2>
+<div><pre><code><span>make</span> build-release
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="运行节点"> 运行节点</h2>
+<div><pre><code><span>make</span> run-dev
+</code></pre>
+<div><span>1</span><br></div></div><h2 id="清除开发链"> 清除开发链</h2>
+<div><pre><code><span>make</span> purge-dev
+</code></pre>
+<div><span>1</span><br></div></div>]]></content>
+    <author>
+      <name>ZeroDAO</name>
+    </author>
+    <category term="快速开始"/>
+    <contributor>
+      <name>ZeroDAO</name>
+    </contributor>
+    <published>2021-11-16T15:48:24.000Z</published>
+    <rights>Copyright by ZeroDAO</rights>
+  </entry>
+</feed>
